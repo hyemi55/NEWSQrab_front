@@ -1,6 +1,6 @@
 # News Shortform Web
 ## 🏗️ 사용 기술
-React
+- React
 
 ![image](https://github.com/user-attachments/assets/d676dbf1-3b72-490e-ac89-b32e07bc66c7)
 
