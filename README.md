@@ -1,4 +1,9 @@
 # News Shortform Web
+## 🏗️ 사용 기술
+React
+
+![image](https://github.com/user-attachments/assets/d676dbf1-3b72-490e-ac89-b32e07bc66c7)
+
 
 ## 📝 프로젝트 개요
 React 기반 뉴스 숏폼 생성 사이트로, **생성형 AI**를 활용하여 최신 뉴스를 짧고 강렬한 영상 형식으로 제공합니다. 또한 뉴스 제작자가 손쉽게 숏폼을 제작할 수 있도록 하는 사용자 입력형 숏폼 제작 기능을 포함합니다.
