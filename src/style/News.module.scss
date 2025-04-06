@@ -1,0 +1,25 @@
+.container {
+    flex: 1; //#root의 자식. #root가 display: flex;를 가짐.
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.introduction {
+    align-items: center;
+}
+
+.categoryButtonContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.categoryButtonContainer button {
+    background-color: transparent;
+    flex: 1;
+    text-align: center;
+    margin-left: 20px;
+    font-size: 15px;
+}
