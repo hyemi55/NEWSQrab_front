@@ -2,7 +2,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import Header from "./components/Header"
 import News from './pages/News'
-import Generator from './pages/Generator'
+import GenMobile from './pages/GenMobile'
+import GenWeb from "./pages/GenWeb"
 
 function App() {
 
@@ -11,7 +12,8 @@ function App() {
       <Header />
       <Routes>
         <Route path="/news" element={<News />} />
-        <Route path="/generator" element={<Generator />} />
+        {/* <Route path="/generator" element={<GenMobile />} /> */}
+        <Route path="/generator" element={<GenWeb />} />
 
         <Route path="/" element={<Navigate to='/news' replace/>} />
       </Routes>

@@ -10,13 +10,16 @@ export default function News() {
 
     return (
         <div className={styles.container}>
-            <h2>"오늘 뉴스 봤어?"</h2>
-            <p className={styles.introduction}>수다처럼 재밌고, 놓치기 아쉬운 이슈만 쏙쏙!<br />친근한 대화로 뉴스를 전해줘요.</p>
-
-            <div>
-                <button>오늘의 뉴스</button>
+            <div className={styles.actionButtonContainer}>
+                <button onClick={() => navigate(0)} className={styles.currentActionButton}>오늘의 뉴스</button>
                 <button onClick={() => {navigate('/generator')}}>영상 만들기</button>
             </div>
+            <p className={styles.mainText}>"오늘 뉴스 봤어?"</p>
+            <div className={styles.introduction}>
+                <p>수다처럼 재밌고, 놓치기 아쉬운 이슈만 쏙쏙!</p>
+                <p>친근한 대화로 뉴스를 전해줘요.</p>
+            </div>
+            
 
             <div className={styles.categoryButtonContainer}>
                 <button onClick={()=>setCategory('all')}>핵심만!</button>

@@ -1,25 +1,63 @@
 .container {
     flex: 1; //#root의 자식. #root가 display: flex;를 가짐.
 
+    width: 907.2px;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    margin-top: 126px;
+}
+
+.mainText {
+    font-size: 48px;
+    font-weight: bold;
 }
 
 .introduction {
-    align-items: center;
+    height: 60px;
+    margin: 0;
+    font-size: 20px;
+    color: #777A7D;
+    text-align: center;
+
+    p {
+        margin: 0;
+    }
+}
+
+.actionButtonContainer {
+    position: absolute;
+    top: 0;
+
+    button {
+        background-color: transparent;
+    }
+}
+
+.currentActionButton {
+    font-weight: 600;
 }
 
 .categoryButtonContainer {
-    width: 100%;
+    width: 530px;
+    height: 21px;
     display: flex;
     flex-direction: row;
     justify-content: center;
+    gap: 20px;
+
+    margin-top: 128.5px;
+    margin-bottom: 31px;
+    margin-right: auto;
+
+    font-size: 15px;
 }
 .categoryButtonContainer button {
     background-color: transparent;
-    flex: 1;
+    width: 69px;
     text-align: center;
-    margin-left: 20px;
-    font-size: 15px;
+    // margin-left: 20px;
+    padding: 0px;
 }
+

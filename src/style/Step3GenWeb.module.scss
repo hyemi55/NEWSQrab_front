@@ -1,0 +1,21 @@
+.mainContentContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.video {
+    width: 333px;
+    height: 556px;
+
+    background: #DDDFE3;
+    border-radius: 26.5487px;
+}
+
+.subtitleContainer {
+    width: 547px;
+    height: 556px;
+
+    background: #F5F6F7;
+    border-radius: 20px;
+}

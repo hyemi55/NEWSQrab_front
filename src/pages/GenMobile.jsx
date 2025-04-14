@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import axios from "axios"
-import styles from "../style/Generator.module.scss"
+import styles from "../style/GenMobile.module.scss"
 
-export default function Generator() {
+export default function GenMobile() {
     const [videoUrl, setVideoUrl] = useState(null);
     const [inputValue, setInputValue] = useState('');
 

@@ -1,10 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import axios from 'axios';
 import styles from '../style/VideoList.module.scss';
 
 export default function VideoList({ category }) {
     const [loading, setLoading] = useState(true);
     const [videoUrls, setVideoUrls] = useState(null);
+    const currentCategory = useRef(category);
+
+    if (currentCategory.current != category) {
+        setLoading(true);
+        currentCategory.current = category
+    }
 
     useEffect(() => {
         const fetchVideos = async () => {
@@ -18,16 +24,14 @@ export default function VideoList({ category }) {
                 //   }, { withCredentials : true })
                 // setVideoUrls(response.data.urls);
                 setVideoUrls(['1', '2','3','4', '5', '6', '7']);
+                setLoading(false);
             } catch (error) {
                 console.log("숏폼 불러오기 실패", error);
-            } finally {
-                setLoading(false);
             }
-            console.log(videoUrls, loading);
         };
 
         fetchVideos();
-    }, [category]);
+    }, [category, loading]);
 
     if(loading) return <p>Loading...</p>;
 
