@@ -1,12 +1,8 @@
 .container {
-    flex: 1; //#root의 자식. #root가 display: flex;를 가짐.
-
-    width: 907.2px;
+    // width: 907.2px;
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    margin-top: 126px;
 }
 
 .mainText {
@@ -15,7 +11,6 @@
 }
 
 .introduction {
-    height: 60px;
     margin: 0;
     font-size: 20px;
     color: #777A7D;
@@ -26,19 +21,6 @@
     }
 }
 
-.actionButtonContainer {
-    position: absolute;
-    top: 0;
-
-    button {
-        background-color: transparent;
-    }
-}
-
-.currentActionButton {
-    font-weight: 600;
-}
-
 .categoryButtonContainer {
     width: 530px;
     height: 21px;
@@ -47,9 +29,8 @@
     justify-content: center;
     gap: 20px;
 
-    margin-top: 128.5px;
+    margin-top: 83px;
     margin-bottom: 31px;
-    margin-right: auto;
 
     font-size: 15px;
 }

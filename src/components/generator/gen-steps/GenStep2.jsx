@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from '../style/Step2GenWeb.module.scss'
+import styles from 'src/style/generator/gen-steps/GenStep2.module.scss'
 
-export default function Step2GenWeb() {
+export default function GenStep2() {
 
 
     return (

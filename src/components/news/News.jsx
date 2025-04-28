@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
 import axios from "axios";
-import styles from "../style/News.module.scss";
-import VideoList from "../components/VideoList";
+import styles from "src/style/news/News.module.scss";
+import VideoList from "src/components/news/VideoList";
 
 export default function News() {
-    const navigate = useNavigate();
     const [category, setCategory] = useState('all');
 
     return (
         <div className={styles.container}>
-            <div className={styles.actionButtonContainer}>
-                <button onClick={() => navigate(0)} className={styles.currentActionButton}>오늘의 뉴스</button>
-                <button onClick={() => {navigate('/generator')}}>영상 만들기</button>
-            </div>
             <p className={styles.mainText}>"오늘 뉴스 봤어?"</p>
             <div className={styles.introduction}>
-                <p>수다처럼 재밌고, 놓치기 아쉬운 이슈만 쏙쏙!</p>
-                <p>친근한 대화로 뉴스를 전해줘요.</p>
+                <p>1분 안에 핵심 이슈만 쏙쏙!</p>
             </div>
             
 

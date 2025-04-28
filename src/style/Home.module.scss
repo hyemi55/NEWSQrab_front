@@ -1,0 +1,18 @@
+.container {
+    flex: 1;    //#root의 자식. #root가 display: flex;를 가짐.
+}
+
+.branchButtonContainer {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 2px);
+
+    button {
+        background-color: transparent;
+    }
+}
+
+.selectedBranchButton {
+    font-weight: 600;
+}

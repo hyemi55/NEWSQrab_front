@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from '../style/Step3GenWeb.module.scss'
+import styles from 'src/style/generator/gen-steps/GenStep3.module.scss'
 
-export default function Step3GenWeb() {
+export default function GenStep3() {
 
 
     return (

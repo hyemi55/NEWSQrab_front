@@ -58,7 +58,7 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #b3b2b2;
+  /* border-color: #b3b2b2; */
 }
 /* button:focus, */
 button:focus-visible {  /*키보드 탭을 해서 포커스가 갔을 때*/

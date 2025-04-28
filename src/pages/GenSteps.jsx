@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import styles from '../style/GenWeb.module.scss'
-import Step1GenWeb from '../components/Step1GenWeb';
-import Step2GenWeb from '../components/Step2GenWeb';
-import Step3GenWeb from '../components/Step3GenWeb';
-import Step4GenWeb from '../components/Step4GenWeb';
+import styles from 'src/style/generator/GenSteps.module.scss';
+import GenStep1 from '../components/generator/gen-steps/GenStep1';
+import GenStep3 from '../components/generator/gen-steps/GenStep3';
+import GenStep4 from '../components/generator/gen-steps/GenStep4';
+import GenStep2 from '../components/generator/gen-steps/GenStep2';
 
-export default function GenWeb() {
+export default function GenSteps() {
     const [step, setStep] = useState(1);
 
     const stepUIList = [
@@ -37,10 +37,10 @@ export default function GenWeb() {
                 ))}
             </div>
 
-            {step==1 ? <Step1GenWeb /> :
-            step==2 ? <Step2GenWeb /> :
-            step==3 ? <Step3GenWeb /> :
-                        <Step4GenWeb />}
+            {step==1 ? <GenStep1 /> :
+            step==2 ? <GenStep2 /> :
+            step==3 ? <GenStep3 /> :
+                        <GenStep4 />}
 
             
 

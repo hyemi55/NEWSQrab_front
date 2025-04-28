@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import axios from "axios"
-import styles from "../style/GenMobile.module.scss"
+import styles from "../style/generator/GenMobile.module.scss"
 
 export default function GenMobile() {
     const [videoUrl, setVideoUrl] = useState(null);

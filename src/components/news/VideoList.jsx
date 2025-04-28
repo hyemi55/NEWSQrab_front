@@ -1,11 +1,12 @@
 import React, {useState, useEffect, useRef} from 'react';
-import axios from 'axios';
-import styles from '../style/VideoList.module.scss';
+import styles from 'src/style/news/VideoList.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 export default function VideoList({ category }) {
     const [loading, setLoading] = useState(true);
     const [videoUrls, setVideoUrls] = useState(null);
     const currentCategory = useRef(category);
+    const navigate = useNavigate();
 
     if (currentCategory.current != category) {
         setLoading(true);
@@ -39,7 +40,8 @@ export default function VideoList({ category }) {
         <>
             <div className={styles.videoContainer}>
                 {videoUrls.map((url, index) => (
-                    <video key={index} src={url} controls />
+                    // <video key={index} src={url} controls />
+                    <video onClick={() => navigate('/video-test')} key={index} src={url} controls />
                 ))}
             </div>
         </>

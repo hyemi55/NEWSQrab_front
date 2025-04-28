@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
-import styles from '../style/Step1GenWeb.module.scss'
-import ToggleSwitch from './ToggleSwitch';
+import styles from 'src/style/generator/gen-steps/GenStep1.module.scss'
+import ToggleSwitch from '../../ui/ToggleSwitch';
 
-export default function Step1GenWeb() {
+export default function GenStep1() {
     const [charA, setCharA] = useState(0);
     const [charB, setCharB] = useState(0); 
 
