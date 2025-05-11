@@ -1,0 +1,109 @@
+.loginButton {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+
+    background: #FF543D;
+    border-radius: 15px;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 21px;
+
+    color: #FFFFFF;
+}
+
+.profileButton {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+
+    background: #FFFFFF;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 18px;
+
+    color: #000000;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    width: 400px;
+    height: 500px;
+    max-width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.logo {
+    font-family: 'AirbnbCereal_W_Bd';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 52px;
+
+    color: #202020;
+
+    span {
+        color: #FF432A;
+    }
+}
+
+.input {
+    box-sizing: border-box;
+
+    width: 350px;
+    height: 50px;
+
+    background: #FFFFFF;
+    border: 2px solid #DCDEE1;
+    border-radius: 15px;
+
+    padding: 0px 10px;
+}
+
+.modal button {
+    box-sizing: border-box;
+
+    width: 350px;
+    height: 50px;
+
+    border-radius: 15px;
+}
+
+.modalLoginButton, .modalRegisterButton {
+    background: #FF543D;
+
+    color: #FFFFFF;
+}
+
+.modalRegisterButtonGray {
+    background: transparent;
+    color: #777A7D;
+}

@@ -5,7 +5,7 @@
     flex-direction: column;
     align-items: center;
 
-    width: 100%;
+    width: 1145px;
 }
 
 .stepUIContainer {
@@ -60,7 +60,7 @@
 }
 
 .stepUIBar {
-    width: 278px;
+    width: 375px;
     height: 10px;
 
     background: #202020;
@@ -83,35 +83,46 @@
     }
 }
 
+.stepButtonContainer {
+    position: absolute;
+    bottom: 30px;
+    right: 13%;
+}
+
 .previousButton {
     box-sizing: border-box;
+    width: 160px;
     height: 54px;
-    width: 95px;
-    padding: 0;
+    padding: 15px 30px;
     margin-right: 22px;
 
-    border: 1px solid #000000;
-    border-radius: 30px;
+    border-radius: 15px;
 
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
+
+    background: #EAEAEA;
     color: #484848;
 }
 
 .nextButton {
+    box-sizing: border-box;
+    width: 160px;
     height: 54px;
-    background: #202020;
-    border-radius: 30px;
     padding: 15px 30px;
+
+    border-radius: 15px;
 
     font-family: 'Pretendard';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
     line-height: 24px;
+
+    background: #FF543D;
     color: #FFFFFF;
 }
 

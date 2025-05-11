@@ -1,10 +1,80 @@
-.subtitleContainer {
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mainContentContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.conversationContainer {
     box-sizing: border-box;
 
-    width: 909px;
-    height: 536px;
+    width: 496px;
+    height: 445px;
 
     background: #FFFFFF;
-    border: 2px solid #C8C8C8;
+
+    overflow-y: scroll;
+}
+
+.lineBlock {
+    margin-bottom: 10px;
+}
+
+.userInputChatContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 20px;
+
+    height: 304px;
+}
+
+.userInputChat {
+    padding: 12px 20px;
+
+    height: 24px;
+
+    background: #EAEAEA;
     border-radius: 20px;
+}
+
+.userInputForm {
+    position: relative;
+
+    input {
+        box-sizing: border-box;
+        width: 530px;
+        height: 143px;
+        padding: 15px;
+
+        background: #FFFFFF;
+        border: 1px solid #C7C7C7;
+        border-radius: 30px;
+    }
+
+    button {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+
+        width: 95px;
+        height: 54px;
+
+        background: #202020;
+        border-radius: 15px;
+
+        font-family: 'Pretendard';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 24px;
+
+        color: #FFFFFF;
+
+    };
 }

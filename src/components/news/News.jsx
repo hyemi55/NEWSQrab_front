@@ -15,12 +15,12 @@ export default function News() {
             
 
             <div className={styles.categoryButtonContainer}>
-                <button onClick={()=>setCategory('all')}>핵심만!</button>
-                <button onClick={()=>setCategory('politics')}>정치</button>
-                <button onClick={()=>setCategory('economy')}>경제</button>
-                <button onClick={()=>setCategory('society')}>사회</button>
-                <button onClick={()=>setCategory('culture')}>생활/문화</button>
-                <button onClick={()=>setCategory('it')}>IT/과학</button>
+                <button onClick={()=>setCategory('all')} className={category=='all' ? styles.selectedCategoryButton : ""}>핵심만!</button>
+                <button onClick={()=>setCategory('politics')} className={category=='politics' ? styles.selectedCategoryButton : ""}>정치</button>
+                <button onClick={()=>setCategory('economy')} className={category=='economy' ? styles.selectedCategoryButton : ""}>경제</button>
+                <button onClick={()=>setCategory('society')} className={category=='society' ? styles.selectedCategoryButton : ""}>사회</button>
+                <button onClick={()=>setCategory('culture')} className={category=='culture' ? styles.selectedCategoryButton : ""}>생활/문화</button>
+                <button onClick={()=>setCategory('it')} className={category=='it' ? styles.selectedCategoryButton : ""}>IT/과학</button>
             </div>
 
             <VideoList category={category} />

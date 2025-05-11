@@ -7,7 +7,7 @@ export default function Header() {
 
     return (
         <div className={styles.container}>
-            <button onClick={() => navigate('/')}>NewsQrab</button>
+            <button onClick={() => navigate('/')}>News<span style={{ color: '#FF543D' }}>Q</span>rab</button>
         </div>
     );
 };

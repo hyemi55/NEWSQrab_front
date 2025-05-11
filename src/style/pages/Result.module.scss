@@ -1,0 +1,53 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+
+    margin-top: 20px;
+}
+
+.container video {
+    width: 274px;
+    height: 439px;
+
+    border-radius: 26.5487px;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+
+    button {
+        width: 140px;
+        height: 50px;
+
+        border-radius: 15px;
+
+        padding: 0px;
+    }
+}
+
+.downloadButton {
+    background: #EAEAEA;
+    
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #202020;
+}
+
+.uploadButton {
+    background: #FF543D;
+
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #FFFFFF;
+}

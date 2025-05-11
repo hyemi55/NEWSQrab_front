@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import styles from 'src/style/Home.module.scss';
+import styles from 'src/style/pages/Home.module.scss';
 import News from "src/components/news/News";
 import Generator from "src/components/generator/Generator";
+import UserModal from "src/components/users/UserModal";
 
 export default function Home() {
     const [branch, setBranch] = useState('news');
+    const [isLogin, setIsLogin] = useState(false);
 
     const classNameHandler = function(branchButton) {
         if (branchButton == branch) return styles.selectedBranchButton;
@@ -13,13 +15,14 @@ export default function Home() {
 
     return (
         <div className={styles.container}>
+            <UserModal isLogin={isLogin} setIsLogin={setIsLogin} />
             <div className={styles.branchButtonContainer}>
                 <button onClick={() => setBranch('news')} className={classNameHandler('news')}>오늘의 뉴스</button>
                 <button onClick={() => setBranch('generator')} className={classNameHandler('generator')}>영상 만들기</button>
             </div>
 
             {branch == 'news' ? <News />
-                              : <Generator />}
+                              : <Generator setIsLogin={setIsLogin} />}
         </div>
     )
 }
