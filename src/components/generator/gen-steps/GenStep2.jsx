@@ -5,6 +5,7 @@ import styles from 'src/style/generator/gen-steps/GenStep2.module.scss'
 
 export default function GenStep2({ conversation, setConversation }) {
     const [userInput, setUserInput] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
     const [userInputArray, setUserInputArray] = useState([]);
     const { articleId } = useParams();
     const [parentId, setParentId] = useState("");
@@ -12,8 +13,8 @@ export default function GenStep2({ conversation, setConversation }) {
     useEffect(() => {
         const fetchConversation = async () => {
             const postDataForOriginal = {
-                // articleId: articleId,
-                articleId: "66a93851a574023e7bbfc565",
+                articleId: articleId,
+                // articleId: "66a93851a574023e7bbfc565",
             }
 
             try {
@@ -25,6 +26,7 @@ export default function GenStep2({ conversation, setConversation }) {
 
                 setConversation(response.data.script);
                 setParentId(response.data._id);
+                setIsLoading(false);
 
             } catch (error) {
                 console.log("conversation 불러오기 에러: ", error);
@@ -38,11 +40,16 @@ export default function GenStep2({ conversation, setConversation }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
+        setUserInputArray(userInputArray.concat([userInput]));
+        setIsLoading(true);
+
         const postDataForModified = {
             articleId: articleId,
             parentId: parentId,
-            userRequst: userInput,
+            userRequest: userInput,
         }
+
+        setUserInput("");
 
         try {
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/user-modified`, postDataForModified);
@@ -53,12 +60,13 @@ export default function GenStep2({ conversation, setConversation }) {
 
             setConversation(response.data.script);
             setParentId(response.data._id);
-            setUserInputArray(userInputArray.concat([userInput]));
             // console.log(userInputArray);
 
         } catch (error) {
             console.log("conversation 수정 에러: ", error);
         }
+
+        setIsLoading(false);
     };
 
 
@@ -68,17 +76,17 @@ export default function GenStep2({ conversation, setConversation }) {
 
             <div className={styles.mainContentContainer}>
                 <div className={styles.conversationContainer}>
-                {Object.keys(conversation).length==0 ? <div>대사 생성 중...</div> : (
-                    conversation.map((lineObj, index) => {
-                        const [speaker, text] = Object.entries(lineObj)[0];
-                        return (
-                            <div key={index} className={styles.lineBlock}>
-                                <strong>{speaker}</strong><br/>
-                                {text}
-                            </div>
-                        );
-                    }
-                ))}
+                    {isLoading ? <div>대사 생성 중...</div> : (
+                        conversation.map((lineObj, index) => {
+                            const [speaker, text] = Object.entries(lineObj)[0];
+                            return (
+                                <div key={index} className={styles.lineBlock}>
+                                    <strong>{speaker=='user1' ? '캐릭터B' : '캐릭터A'}</strong><br/>
+                                    {text}
+                                </div>
+                            );
+                        }
+                    ))}
                 </div>
                 <div>
                     <div className={styles.userInputChatContainer}>

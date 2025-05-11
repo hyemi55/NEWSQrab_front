@@ -7,22 +7,27 @@
 .mainContentContainer {
     display: flex;
     flex-direction: row;
-    gap: 15px;
+    gap: 50px;
 }
 
 .conversationContainer {
+    position: relative;
+
     box-sizing: border-box;
 
     width: 496px;
     height: 445px;
 
-    background: #FFFFFF;
-
     overflow-y: scroll;
 }
 
+.conversationContainer::-webkit-scrollbar {
+    display: none;
+}
+
 .lineBlock {
-    margin-bottom: 10px;
+    line-height: 27px;
+    margin-bottom: 30px;
 }
 
 .userInputChatContainer {

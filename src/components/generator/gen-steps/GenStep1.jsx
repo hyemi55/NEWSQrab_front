@@ -5,10 +5,9 @@ import Crab from "src/assets/img/crab.png";
 import Octopus from "src/assets/img/octopus.png";
 import Fish from "src/assets/img/fish.png";
 import StarFish from "src/assets/img/starfish.png";
+import Help_Circle from "src/assets/img/help-circle.png";
 
-export default function GenStep1() {
-    const [charA, setCharA] = useState(0);
-    const [charB, setCharB] = useState(0); 
+export default function GenStep1({ charA, setCharA, charB, setCharB }) {
     const [selectedChar, setSelectedChar] = useState(Crab);
 
     const characterA = [Crab, Octopus];
@@ -22,6 +21,8 @@ export default function GenStep1() {
                 <div className={styles.viewChar} >
                     {selectedChar=="선택 안 함" ? <div/>:
                                                 <img src={selectedChar}/>}
+                    <div className={styles.selectedCharName}>캐릭터 이름</div>
+                    <div className={styles.selectedCharDescription}>캐릭터 설명</div>
                 </div>
 
                 <div className={styles.customContainer}>
@@ -55,8 +56,12 @@ export default function GenStep1() {
                             </button>
                         ))}
                     </div>
-
-                    <div className={styles.label}>중립 필터</div>
+                    
+                    <div className={styles.neutralContainer}>
+                        <div className={styles.label}>중립 필터</div>
+                        <img src={Help_Circle} />
+                    </div>
+                    
                     <ToggleSwitch />
                 </div>
             </div>

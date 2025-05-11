@@ -1,10 +1,28 @@
 import React from 'react';
 import styles from "src/style/pages/Result.module.scss"
+import axios from 'axios';
 
 export default function Result() {
 
-    const handleDownloadClick = () => {
+    const handleDownloadClick = async () => {
+        // cors 에러. 백엔드 완성 이후 재작성할 것.
+        // try {
+        //     const response = await axios.get(
+        //         'https://www.w3schools.com/html/movie.mp4',
+        //         {
+        //             responseType: 'blob',
+        //         }
+        //     );
 
+        //     const url = URL.createObjectURL(response.data);
+        //     const a = document.createElement('a');
+        //     a.href = url;
+        //     a.download = 'my-video.mp4';
+        //     a.click();
+        //     URL.revokeObjectURL(url);
+        // } catch (error) {
+        //     console.error('다운로드 실패:', error);
+        // }
     }
 
     const handleUploadClick = () => {

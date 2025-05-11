@@ -12,6 +12,9 @@
 .title {
     font-size: 48px;
     font-weight: 700;
+
+    position: relative;
+    bottom: 62px;
 }
 
 .container form {
@@ -27,21 +30,27 @@
     display: flex;
     flex-direction: row;
 
+    position: relative;
+    bottom: 62px;
+
     input {
-        margin-left: 40px;
+        margin-left: 20px;
         border: 0px;
 
         width: 70%;
 
-        :focus {
+        &:focus {
             outline: none;
         }
     }
 
     button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
         margin-left: auto;
         width: 152px;
-        // height: 54px;
         color: #FFFFFF;
         background: #FF543D;
         border-radius: 15px;

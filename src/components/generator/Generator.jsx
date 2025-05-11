@@ -22,9 +22,14 @@ export default function Generator({ setIsLogin }) {
                 const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/articles`, postData);
                 const articleId = response.data._id;
                 console.log(articleId);
-    
-                navigate(`/generating/${articleId}`);
-    
+
+                const content = response.data.content;
+                if (content == "기사 내용을 찾을 수 없습니다.") {
+                    alert("기사 내용을 찾을 수 없습니다")
+                }
+                else {
+                    navigate(`/generating/${articleId}`);
+                }
             } catch (error) {
                 console.error('에러:', error);
             }
