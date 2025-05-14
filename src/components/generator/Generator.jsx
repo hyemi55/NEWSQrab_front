@@ -5,6 +5,7 @@ import styles from 'src/style/generator/Generator.module.scss'
 
 export default function Generator({ setIsLogin }) {
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
     const [url, setUrl] = useState("");
 
     const handleSubmit = async function(event) {
@@ -17,6 +18,8 @@ export default function Generator({ setIsLogin }) {
             const postData = {
                 url: url
             };
+
+            setIsLoading(true);
     
             try {
                 const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/articles`, postData);
@@ -45,7 +48,7 @@ export default function Generator({ setIsLogin }) {
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                 />
-                <button type="submit">영상 만들기</button>
+                <button type="submit">{!isLoading ? '영상 만들기' : '크롤링 중'}</button>
             </form>
         </div>
     )

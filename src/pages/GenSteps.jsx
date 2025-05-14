@@ -11,6 +11,7 @@ export default function GenSteps() {
     const [charA, setCharA] = useState(0);
     const [charB, setCharB] = useState(0); 
     const [conversation, setConversation] = useState({});
+    const [conversationId, setConversationId] = useState(null);
     
     const navigate = useNavigate();
 
@@ -44,8 +45,9 @@ export default function GenSteps() {
             </div>
 
             {step==1 ? <GenStep1 charA={charA} setCharA={setCharA} charB={charB} setCharB={setCharB} /> :
-            step==2 ? <GenStep2 conversation={conversation}  setConversation={setConversation} charA={charA} charB={charB} /> :
-                    <Result />}
+            step==2 ? <GenStep2 conversation={conversation}  setConversation={setConversation}
+                                setConversationId={setConversationId}/> :
+                    <Result conversationId={conversationId}/>}
 
             
 

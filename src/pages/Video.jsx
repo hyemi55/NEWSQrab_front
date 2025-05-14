@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 export default function Video() {
     const videoRef = useRef(null);
     const [article, setArticle] = useState(null);
+    const [muted, setMuted] = useState(false);
     const [isSeeConversation, setIsSeeConversation] = useState(false);
     const navigate = useNavigate();
 
@@ -31,7 +32,11 @@ export default function Video() {
         fetchArticle();
       }, []);
 
-    
+    const toggleMute = () => {
+      const video = videoRef.current;
+      video.muted = !video.muted;
+      setMuted(video.muted);
+    };
   
     return (
       <div className={styles.container}>
@@ -50,7 +55,7 @@ export default function Video() {
               <button className={styles.moveButton}><img src={UpArrow} alt="이전 동영상 보기" /></button>
               <button className={styles.moveButton}><img src={DownArrow} alt="다음 동영상 보기" /></button>
             </div>
-            <button className={styles.soundButton}><img src={SoundVolume} alt="음량 조절" /></button>
+            <button className={styles.soundButton} onClick={toggleMute}><img src={SoundVolume} alt="음량 조절" /></button>
           </div>
           {isSeeConversation && (
               <div className={styles.articleContainer}>

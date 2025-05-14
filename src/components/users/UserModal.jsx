@@ -1,9 +1,12 @@
 import axios from 'axios';
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { setUserName } from 'src/redux/modules/user.jsx';
 import styles from "src/style/users/UserModal.module.scss"
 import UserIcon from "src/assets/img/user.png";
 
 export default function UserModal({ isLogin, setIsLogin }) {
+    const dispatch = useDispatch();
     const [isRegister, setIsRegister] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -21,6 +24,7 @@ export default function UserModal({ isLogin, setIsLogin }) {
         try {
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/login`, postDataForLogin);
             localStorage.setItem('accessToken', response.data.accessToken);
+            dispatch(setUserName(username));
 
             setIsLogin(false);
 

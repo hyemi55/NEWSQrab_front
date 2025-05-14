@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import styles from 'src/style/generator/gen-steps/GenStep2.module.scss'
 
-export default function GenStep2({ conversation, setConversation }) {
+export default function GenStep2({ conversation, setConversation, setConversationId }) {
     const [userInput, setUserInput] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const [userInputArray, setUserInputArray] = useState([]);
@@ -18,15 +18,27 @@ export default function GenStep2({ conversation, setConversation }) {
             }
 
             try {
-                const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/original`, postDataForOriginal);
-                // console.log(response);
-                // console.log(response.data);
-                // console.log(response.data.script);
-                // console.log(Object.values(response.data.script[0]));
+                const response1 = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/original`, postDataForOriginal);
 
-                setConversation(response.data.script);
-                setParentId(response.data._id);
+                // 백엔드 서버 배포되면 삭제할 것
+                setConversation(response1.data.script);
+                setParentId(response1.data._id);
+                setConversationId(response1.data._id);
                 setIsLoading(false);
+
+
+                // 백엔드 rag 코드 없어서 안 됨. 백엔드 서버 배포되면 주석 제거
+                // const parentConversationId = response1.data._id;
+                // const postDataForRag = {
+                //     articleId: articleId,
+                //     parentConversationId: parentConversationId,
+                // }
+                // const response2 = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/rag-modified`, postDataForRag);
+
+                // setConversation(response2.data.script);
+                // setParentId(response2.data._id);
+                // setConversationId(response2.data._id);
+                // setIsLoading(false);
 
             } catch (error) {
                 console.log("conversation 불러오기 에러: ", error);
@@ -53,14 +65,10 @@ export default function GenStep2({ conversation, setConversation }) {
 
         try {
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/user-modified`, postDataForModified);
-            // console.log(response);
-            // console.log(response.data);
-            // console.log(response.data.script);
-            // console.log(Object.values(response.data.script[0]));
 
             setConversation(response.data.script);
             setParentId(response.data._id);
-            // console.log(userInputArray);
+            setConversationId(response.data._id);
 
         } catch (error) {
             console.log("conversation 수정 에러: ", error);
