@@ -72,7 +72,7 @@ export default function GenStep2({ conversation, setConversation }) {
 
     return ( 
         <div className={styles.container}>
-            <h2>원하는 톤으로 대화를 수정해 봐!</h2>
+            <div className={styles.title}>원하는 톤으로 대화를 수정해 봐!</div>
 
             <div className={styles.mainContentContainer}>
                 <div className={styles.conversationContainer}>

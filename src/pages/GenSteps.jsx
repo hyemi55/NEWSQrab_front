@@ -4,6 +4,7 @@ import GenStep1 from '../components/generator/gen-steps/GenStep1';
 import GenStep2 from '../components/generator/gen-steps/GenStep2';
 import GenStep3 from '../components/generator/gen-steps/GenStep3';
 import { useNavigate } from 'react-router-dom';
+import Result from '../components/generator/gen-steps/Result';
 
 export default function GenSteps() {
     const [step, setStep] = useState(1);
@@ -16,7 +17,7 @@ export default function GenSteps() {
     const stepUIList = [
         {num: 1, text: "캐릭터 선택하기"},
         {num: 2, text: "자막 수정하기"},
-        {num: 3, text: "자료 추가하기"}
+        {num: 3, text: "완성"}
     ];
 
     const handleNextClick = function() {
@@ -44,14 +45,15 @@ export default function GenSteps() {
 
             {step==1 ? <GenStep1 charA={charA} setCharA={setCharA} charB={charB} setCharB={setCharB} /> :
             step==2 ? <GenStep2 conversation={conversation}  setConversation={setConversation} charA={charA} charB={charB} /> :
-                    <GenStep3 conversation={conversation}  setConversation={setConversation} />}
+                    <Result />}
 
             
 
-            <div className={styles.stepButtonContainer}>
-                <button className={styles.previousButton} onClick={handlePreviousClick}>이전</button>
-                <button className={styles.nextButton} onClick={handleNextClick}>다음</button>
-            </div>
+            {step <= 2 ?
+                <div className={styles.stepButtonContainer}>
+                    <button className={styles.previousButton} onClick={handlePreviousClick}>이전</button>
+                    <button className={styles.nextButton} onClick={handleNextClick}>다음</button>
+                </div> : <div/>}
         </div>
     )
 }

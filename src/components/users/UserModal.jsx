@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import styles from "src/style/users/UserModal.module.scss"
+import UserIcon from "src/assets/img/user.png";
 
 export default function UserModal({ isLogin, setIsLogin }) {
     const [isRegister, setIsRegister] = useState(false);
@@ -20,7 +21,6 @@ export default function UserModal({ isLogin, setIsLogin }) {
         try {
             const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/login`, postDataForLogin);
             localStorage.setItem('accessToken', response.data.accessToken);
-            console.log(localStorage.getItem('accessToken'));
 
             setIsLogin(false);
 
@@ -59,7 +59,7 @@ export default function UserModal({ isLogin, setIsLogin }) {
     return (
         <div>
             {!localStorage.getItem("accessToken") ? <button className={styles.loginButton} onClick={() => setIsLogin(true)}>로그인</button> :
-                                                    <button className={styles.profileButton} onClick={() => localStorage.removeItem("accessToken")}>로그아웃</button>
+                                                    <button className={styles.profileButton} onClick={() => localStorage.removeItem("accessToken")}><img src={UserIcon} /></button>
             }
 
             {isLogin && (

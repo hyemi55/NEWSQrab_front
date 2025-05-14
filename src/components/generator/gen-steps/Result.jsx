@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from "src/style/pages/Result.module.scss"
+import styles from "src/style/generator/gen-steps/Result.module.scss"
 import axios from 'axios';
 
 export default function Result() {
@@ -31,7 +31,7 @@ export default function Result() {
 
     return (
         <div className={styles.container}>
-            <h2>완성~ 내 뉴스를 업로드해볼까?</h2>
+            <div className={styles.title}>완성~ 내 뉴스를 업로드해볼까?</div>
             
             <video src='1' controls className={styles.video}/>
 

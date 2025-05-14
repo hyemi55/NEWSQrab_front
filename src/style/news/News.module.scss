@@ -5,15 +5,19 @@
     align-items: center;
 }
 
-.mainText {
-    font-size: 48px;
+.slogan {
+    font-size: 40px;
     font-weight: bold;
+
+    margin-top: 62px;
+    margin-bottom: 10px;
 }
 
 .introduction {
     margin: 0;
-    font-size: 20px;
-    color: #777A7D;
+    font-size: 15px;
+    font-weight: 500;
+    color: #575757;
     text-align: center;
 
     p {
@@ -22,31 +26,28 @@
 }
 
 .categoryButtonContainer {
-    width: 530px;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 20px;
+    gap: 15px;
 
     margin-top: 83px;
     margin-bottom: 21px;
 
     font-size: 15px;
 }
+
 .categoryButtonContainer button {
-    background-color: transparent;
-    color: #777A7D;
-    width: 69px;
+    background-color: #F4F4F4;
+    color: #202020;
     text-align: center;
-    padding: 0 0 10px;
-    font-weight: 700;
+    padding: 7px 12px;
+    font-weight: 500;
     transition: none;
 }
 
 .categoryButtonContainer .selectedCategoryButton {
-    color: #FF543D;
-
-    border-width: 0 0 3px;
-    border-color: #FF543D;
-    border-radius: 0;
+    color: white;
+    background-color: #202020;
+    font-weight: 700;
 }

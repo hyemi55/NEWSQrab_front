@@ -1,32 +1,65 @@
 import React, {useState} from 'react'
 import styles from 'src/style/generator/gen-steps/GenStep1.module.scss'
-import ToggleSwitch from '../../ui/ToggleSwitch';
-import Crab from "src/assets/img/crab.png";
-import Octopus from "src/assets/img/octopus.png";
-import Fish from "src/assets/img/fish.png";
-import StarFish from "src/assets/img/starfish.png";
-import Help_Circle from "src/assets/img/help-circle.png";
+import CrabImg from "src/assets/img/crab.png";
+import CrabGrayImg from 'src/assets/img/crab_gray.png';
+import OctopusImg from "src/assets/img/octopus.png";
+import OctopusGrayImg from 'src/assets/img/octopus_gray.png';
+import FishImg from "src/assets/img/fish.png";
+import FishGrayImg from 'src/assets/img/fish_gray.png';
+import StarFishImg from "src/assets/img/starfish.png";
+import StarFishGrayImg from 'src/assets/img/starfish_gray.png';
 
 export default function GenStep1({ charA, setCharA, charB, setCharB }) {
-    const [selectedChar, setSelectedChar] = useState(Crab);
+    const Crab = {
+        name: '큐랩이',
+        description: '호기심 많고 똑똑한 꽃게',
+        img: CrabImg,
+        grayImg: CrabGrayImg,
+    }
 
+    const Octopus = {
+        name: '무너',
+        description: '츤데레 문어',
+        img: OctopusImg,
+        grayImg: OctopusGrayImg,
+    }
+
+    const StarFish = {
+        name: '윙클',
+        description: '장난기 많은 불가사리',
+        img: StarFishImg,
+        grayImg: StarFishGrayImg,
+    }
+
+    const Fish = {
+        name: '벌룬',
+        description: '소심하고 걱정이 많은 복어',
+        img: FishImg,
+        grayImg: FishGrayImg,
+    }
+
+    const [selectedChar, setSelectedChar] = useState(Crab);
+    
     const characterA = [Crab, Octopus];
     const characterB = [StarFish, Fish, "선택 안 함"];
 
     return (
         <div className={styles.container}>
-            <h2>어떤 캐릭터로 만들어 볼까?</h2>
+            <div className={styles.title}>어떤 캐릭터로 만들어 볼까?</div>
 
             <div className={styles.mainContentContainer}>
-                <div className={styles.viewChar} >
+                <div>
                     {selectedChar=="선택 안 함" ? <div/>:
-                                                <img src={selectedChar}/>}
-                    <div className={styles.selectedCharName}>캐릭터 이름</div>
-                    <div className={styles.selectedCharDescription}>캐릭터 설명</div>
+                        <div className={styles.viewChar} >
+                            <img src={selectedChar.img}/>
+                            <div className={styles.selectedCharName}>{selectedChar.name}</div>
+                            <div className={styles.selectedCharDescription}>{selectedChar.description}</div>
+                        </div>
+                    }
                 </div>
 
                 <div className={styles.customContainer}>
-                    <div className={styles.label}>캐릭터A 선택</div>
+                    <div className={styles.label}>캐릭터A 선택<span> (설명 담당)</span></div>
                     <div className={styles.characterTypeContainer}>
                         {characterA.map((type, idx) => (
                             <button className={`${styles.characterTypeButton} 
@@ -35,14 +68,14 @@ export default function GenStep1({ charA, setCharA, charB, setCharB }) {
                                             setCharA(idx)
                                             setSelectedChar(type)
                                         }} key={idx}>
-                                <img src={type} />       
+                                <img src={idx==charA ? type.img : type.grayImg} />       
                             </button>
                         ))}
                         {/*index 비교해서 선택된 캐릭터 타입 판별*/}
                     </div>
                     
-                    <div className={styles.label}>캐릭터B 선택</div>
-                        <div className={styles.characterTypeContainer}>
+                    <div className={styles.label}>캐릭터B 선택<span> (리액션 담당)</span></div>
+                    <div className={styles.characterTypeContainer}>
                         {characterB.map((type, idx) => (
                             <button className={`${styles.characterTypeButton} 
                                                 ${idx==charB ? styles.selectedTypeButton : ''}`} 
@@ -51,18 +84,10 @@ export default function GenStep1({ charA, setCharA, charB, setCharB }) {
                                             setSelectedChar(type)
                                         }} key={idx}>
                                 {type=="선택 안 함" ? "선택 안 함" :
-                                                    <img src={type} />
-}
+                                                    <img src={idx==charB ? type.img : type.grayImg} />}
                             </button>
                         ))}
                     </div>
-                    
-                    <div className={styles.neutralContainer}>
-                        <div className={styles.label}>중립 필터</div>
-                        <img src={Help_Circle} />
-                    </div>
-                    
-                    <ToggleSwitch />
                 </div>
             </div>
         </div>

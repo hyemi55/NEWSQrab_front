@@ -2,7 +2,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 25px;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 600;
 
     margin-top: 20px;
 }
@@ -27,27 +32,21 @@
         border-radius: 15px;
 
         padding: 0px;
+
+        margin-top: 8px;
+
+        font-style: normal;
+        font-weight: 600;
+        font-size: 20px;
     }
 }
 
 .downloadButton {
     background: #EAEAEA;
-    
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
     color: #202020;
 }
 
 .uploadButton {
     background: #FF543D;
-
-    font-family: 'Pretendard';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
     color: #FFFFFF;
 }

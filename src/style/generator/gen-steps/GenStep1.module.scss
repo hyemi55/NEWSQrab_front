@@ -1,4 +1,6 @@
 .container {
+    height: 552px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,6 +12,14 @@
     justify-content: center;
     align-items: center;
     gap: 105px;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 600;
+
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .viewChar {
@@ -29,8 +39,10 @@
 
 
     .selectedCharName {
+        position: relative;
+        top: 10px;
+
         height: 48px;
-        font-family: 'Pretendard';
         font-style: normal;
         font-weight: 700;
         font-size: 32px;
@@ -40,11 +52,13 @@
     }
 
     .selectedCharDescription {
+        position: relative;
+        top: 20px;
+
         height: 30px;
-        font-family: 'Pretendard';
         font-style: normal;
         font-weight: 500;
-        font-size: 20px;
+        font-size: 16px;
         line-height: 150%;
 
         color: #575B5E;
@@ -70,34 +84,32 @@
     gap: 23px;
 
     margin-bottom: 20px;
-}
 
-.selectedTypeButton {
-    border: 3px solid #000000;
+    button {
+        color: #9EA3A8;
+        background-color: transparent;
+
+        img {
+            width: 130px;
+            height: 130px;
+        }
+    }
 }
 
 .label {
-    // width: 97px;
     height: 19px;
 
     margin-bottom: 12px;
 
     font-family: 'Pretendard';
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 16px;
     line-height: 19px;
 
     color: #4E5256;
-}
-
-.neutralContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
-
-    img {
-        margin-bottom: 12px;
+    
+    span {
+        color: #9EA3A8;
     }
 }

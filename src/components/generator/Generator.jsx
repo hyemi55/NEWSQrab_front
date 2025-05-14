@@ -38,7 +38,7 @@ export default function Generator({ setIsLogin }) {
 
     return (
         <div className={styles.container}>
-            <div className={styles.title}>나만의 뉴스를 만들어 봐!</div>
+            <div className={styles.title}>어려운 IT·과학 이야기, 숏폼으로 만들어 봐!</div>
             <form onSubmit={handleSubmit}>
                 <input
                     placeholder='뉴스 링크 붙여넣기'

@@ -1,7 +1,17 @@
 .container {
+    height: 552px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 600;
+
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .mainContentContainer {
@@ -64,20 +74,20 @@
 
     button {
         position: absolute;
-        bottom: 15px;
-        right: 15px;
+        bottom: 13px;
+        right: 13px;
 
-        width: 95px;
-        height: 54px;
+        width: 77px;
+        height: 43px;
+        padding: 0px;
 
         background: #202020;
         border-radius: 15px;
 
         font-family: 'Pretendard';
         font-style: normal;
-        font-weight: 600;
-        font-size: 20px;
-        line-height: 24px;
+        font-weight: 400;
+        font-size: 17px;
 
         color: #FFFFFF;
 
