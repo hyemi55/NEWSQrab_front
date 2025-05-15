@@ -18,8 +18,6 @@ export default function Result({ conversationId }) {
                     character2: "복어",
                     createdBy: username,
                 }
-            console.log("이름" + username);
-            console.log('result ' + conversationId);
 
             try {
                 await axios.post(`${import.meta.env.VITE_BACKEND_URL}/reels/${conversationId}/tts`);
@@ -73,7 +71,7 @@ export default function Result({ conversationId }) {
                         : <div className={styles.altVideoText}>영상 생성 중...</div>}
 
             <div className={styles.buttonContainer}>
-                <button className={styles.downloadButton} onClick={handleDownloadClick}>다운로드</button>
+                {/* <button className={styles.downloadButton} onClick={handleDownloadClick}>다운로드</button> */}
                 {/* <button className={styles.uploadButton} onClick={handleUploadClick}>업로드</button> */}
             </div>
         </div>

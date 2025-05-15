@@ -10,7 +10,6 @@ export default function GenStep2({ charA, charB, conversation, setConversation, 
     const [parentId, setParentId] = useState("");
 
     useEffect(() => {
-        console.log(charA, charB);
         const fetchConversation = async () => {
             const postDataForOriginal = {
                 articleId: articleId,
@@ -24,7 +23,6 @@ export default function GenStep2({ charA, charB, conversation, setConversation, 
                 setConversation(response1.data.script);
                 setParentId(response1.data._id);
                 setConversationId(response1.data._id);
-                console.log('genstep2 ' + response1.data._id);
                 setIsLoading(false);
 
 

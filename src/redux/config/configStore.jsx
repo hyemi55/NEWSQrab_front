@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { crabReducer, octopusReducer, starFishReducer, fishReducer } from '../modules/character.jsx';
-import userReducer from '../modules/user.jsx';
+import { userReducer } from '../modules/user.jsx';
 
 const store = configureStore({
   reducer: {

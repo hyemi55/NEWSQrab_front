@@ -34,6 +34,8 @@ export default function GenSteps() {
     }
 
     return (
+        localStorage.getItem('accessToken') ? 
+        
         <div className={styles.container}>
             <div className={styles.stepUIContainer}>
                 {stepUIList.map((stepUI, idx) => (
@@ -62,5 +64,7 @@ export default function GenSteps() {
                     <button className={`${styles.nextButton} ${isLoading ? styles.inActiveButton : ''}` } onClick={handleNextClick}>다음</button>
                 </div> : <div/>}
         </div>
+
+        : <div/>
     )
 }

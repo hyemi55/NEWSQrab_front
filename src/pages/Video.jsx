@@ -21,12 +21,9 @@ export default function Video() {
     const [articleUrl, setArticleUrl] = useState();
     const [muted, setMuted] = useState(false);
     const [isSeeConversation, setIsSeeConversation] = useState(false);
-    const [passedTime, setPassedTime] = useState('');
 
     useEffect(() => {
         // 백엔드와 데이터 통신
-
-        console.log(currentIndex);
         try {
           axios.put(`${import.meta.env.VITE_BACKEND_URL}/reels/${reelsId}/views`);
         } catch (error) {
@@ -36,6 +33,7 @@ export default function Video() {
         const fetchReelsDetails = async () => {
             try {
                 const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/reels/${reelsId}/details`);
+                console.log(response.data);
                 setConversation(response.data.conversation.script)
                 setArticleUrl(response.data.articleUrl);
 

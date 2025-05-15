@@ -11,6 +11,8 @@ export default function Generator({ setIsLogin }) {
     const handleSubmit = async function(event) {
         event.preventDefault();
 
+        console.log(localStorage.getItem("accessToken"));
+
         if (!localStorage.getItem("accessToken")) {
             setIsLogin(true);
         }
@@ -24,7 +26,6 @@ export default function Generator({ setIsLogin }) {
             try {
                 const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/articles`, postData);
                 const articleId = response.data._id;
-                console.log(articleId);
 
                 const content = response.data.content;
                 if (content == "기사 내용을 찾을 수 없습니다.") {
@@ -35,6 +36,7 @@ export default function Generator({ setIsLogin }) {
                 }
             } catch (error) {
                 console.error('에러:', error);
+                setIsLoading(false);
             }
         }
     }
