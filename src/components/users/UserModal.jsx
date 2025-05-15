@@ -1,9 +1,9 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { setUserName } from 'src/redux/modules/user.jsx';
-import styles from "src/style/users/UserModal.module.scss"
-import UserIcon from "src/assets/img/user.png";
+import { setUserName } from '../../redux/modules/user.jsx';
+import styles from "../../style/users/UserModal.module.scss"
+import UserIcon from "../../assets/img/user.png";
 
 export default function UserModal({ isLogin, setIsLogin }) {
     const dispatch = useDispatch();
@@ -29,6 +29,7 @@ export default function UserModal({ isLogin, setIsLogin }) {
             setIsLogin(false);
 
         } catch (error) {
+            alert('잘못된 아이디 또는 비밀번호입니다')
             console.log("로그인 실패: ", error);
         }
     }
@@ -62,13 +63,22 @@ export default function UserModal({ isLogin, setIsLogin }) {
 
     return (
         <div>
-            {!localStorage.getItem("accessToken") ? <button className={styles.loginButton} onClick={() => setIsLogin(true)}>로그인</button> :
-                                                    <button className={styles.profileButton} onClick={() => localStorage.removeItem("accessToken")}><img src={UserIcon} /></button>
+            {!localStorage.getItem("accessToken") ? <button className={styles.loginButton} onClick={() => { 
+                                                                                                                setIsLogin(true);
+                                                                                                                setUsername("");
+                                                                                                                setPassword("");
+                                                                                                            }}>로그인</button> :
+                                                    <button className={styles.profileButton} onClick={() => {
+                                                                                                                localStorage.removeItem("accessToken"); 
+                                                                                                                setUsername("~"); 
+                                                                                                                setPassword("~");
+                                                                                                            }}><img src={UserIcon} /></button>
             }
 
             {isLogin && (
                 <div className={styles.backdrop}>
                     <form className={styles.modal}>
+                        <button className={styles.XButton} onClick={() => setIsLogin(false)}>×</button>
                         <div className={styles.logo}>News<span style={{ color: "#FF432A" }}>Q</span>rab</div>
                         {isRegister && (
                             <input type='text' placeholder="프로필 이미지 URL" className={styles.input} 

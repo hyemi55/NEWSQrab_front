@@ -18,8 +18,8 @@
 
 .profileButton {
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 5px;
+    right: 5px;
 
     width: 30px;
     height: 30px;
@@ -46,6 +46,8 @@
 }
 
 .modal {
+    position: relative;
+
     background-color: white;
     border-radius: 8px;
     padding: 20px;
@@ -96,6 +98,19 @@
     height: 50px;
 
     border-radius: 15px;
+}
+
+.modal .XButton {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+
+    width: 50px;
+    height: 50px;
+
+    background-color: transparent;
+
+    font-size: 20px;
 }
 
 .modalLoginButton, .modalRegisterButton {

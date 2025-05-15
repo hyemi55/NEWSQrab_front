@@ -1,15 +1,15 @@
 // import './App.css'
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
-import Header from "src/components/section/Header"
-import Home from "src/pages/Home"
-import GenSteps from "src/pages/GenSteps"
-import Video from "src/pages/Video.jsx";
+import Header from "./components/section/Header"
+import Home from "./pages/Home"
+import GenSteps from "./pages/GenSteps"
+import Video from "./pages/Video.jsx";
+import DownloadTest from "./DownloadTest.jsx";
 
 
 function AppRoutes() {
   const location = useLocation();
-  const hideHeaderPaths = ['/video-test'];
-  const hideHeader = hideHeaderPaths.includes(location.pathname);
+  const hideHeader = location.pathname.startsWith('/reels/');
 
   return (
     <>
@@ -17,7 +17,8 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/generating/:articleId" element={<GenSteps />} />
-        <Route path="/video-test" element={<Video />} />
+        <Route path="/reels/:reelsId" element={<Video key={location.pathname}/>} />
+        <Route path="/DownloadTest" element={<DownloadTest />} />
       </Routes>
     </>
   );

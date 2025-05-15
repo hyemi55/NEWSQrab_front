@@ -1,16 +1,16 @@
 import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
-import styles from 'src/style/generator/gen-steps/GenStep2.module.scss'
+import styles from '../../../style/generator/gen-steps/GenStep2.module.scss'
 
-export default function GenStep2({ conversation, setConversation, setConversationId }) {
+export default function GenStep2({ charA, charB, conversation, setConversation, setConversationId, isLoading, setIsLoading }) {
     const [userInput, setUserInput] = useState("");
-    const [isLoading, setIsLoading] = useState(true);
     const [userInputArray, setUserInputArray] = useState([]);
     const { articleId } = useParams();
     const [parentId, setParentId] = useState("");
 
     useEffect(() => {
+        console.log(charA, charB);
         const fetchConversation = async () => {
             const postDataForOriginal = {
                 articleId: articleId,
@@ -24,6 +24,7 @@ export default function GenStep2({ conversation, setConversation, setConversatio
                 setConversation(response1.data.script);
                 setParentId(response1.data._id);
                 setConversationId(response1.data._id);
+                console.log('genstep2 ' + response1.data._id);
                 setIsLoading(false);
 
 
@@ -84,12 +85,12 @@ export default function GenStep2({ conversation, setConversation, setConversatio
 
             <div className={styles.mainContentContainer}>
                 <div className={styles.conversationContainer}>
-                    {isLoading ? <div>대사 생성 중...</div> : (
+                    {isLoading ? <div>대화 생성 중...</div> : (
                         conversation.map((lineObj, index) => {
                             const [speaker, text] = Object.entries(lineObj)[0];
                             return (
                                 <div key={index} className={styles.lineBlock}>
-                                    <strong>{speaker=='user1' ? '캐릭터B' : '캐릭터A'}</strong><br/>
+                                    <strong>{speaker=='user1' ? charB : charA}</strong><br/>
                                     {text}
                                 </div>
                             );
@@ -105,7 +106,7 @@ export default function GenStep2({ conversation, setConversation, setConversatio
                     <form className={styles.userInputForm} onSubmit={handleSubmit}>
                         <input type='text' placeholder='수정하고 싶은 대로 입력해봐!' value={userInput} 
                                 onChange={(e) => setUserInput(e.target.value)}/>
-                        <button>수정</button>
+                        <button className={`${isLoading ? styles.inActiveButton: ""}`}>수정</button>
                     </form>
                 </div>
                 

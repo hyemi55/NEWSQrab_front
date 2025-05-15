@@ -1,5 +1,5 @@
 const user = {
-    username: 'ㅇ',
+    username: 'kitty1234',
 }
 
 const SET_USERNAME = "SET_USERNAME";

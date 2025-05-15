@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from 'src/style/generator/gen-steps/GenStep3.module.scss'
+import styles from '../../../style/generator/gen-steps/GenStep3.module.scss'
 
 export default function GenStep3({ conversation, setConversation }) {
 

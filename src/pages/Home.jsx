@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import styles from 'src/style/pages/Home.module.scss';
-import News from "src/components/news/News";
-import Generator from "src/components/generator/Generator";
-import UserModal from "src/components/users/UserModal";
+import styles from '../style/pages/Home.module.scss';
+import News from "../components/news/News";
+import Generator from "../components/generator/Generator";
+import UserModal from "../components/users/UserModal";
 
 export default function Home() {
     const [branch, setBranch] = useState('news');

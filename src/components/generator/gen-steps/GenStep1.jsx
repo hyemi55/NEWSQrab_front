@@ -1,42 +1,12 @@
 import React, {useState} from 'react'
-import styles from 'src/style/generator/gen-steps/GenStep1.module.scss'
-import CrabImg from "src/assets/img/crab.png";
-import CrabGrayImg from 'src/assets/img/crab_gray.png';
-import OctopusImg from "src/assets/img/octopus.png";
-import OctopusGrayImg from 'src/assets/img/octopus_gray.png';
-import FishImg from "src/assets/img/fish.png";
-import FishGrayImg from 'src/assets/img/fish_gray.png';
-import StarFishImg from "src/assets/img/starfish.png";
-import StarFishGrayImg from 'src/assets/img/starfish_gray.png';
+import styles from '../../../style/generator/gen-steps/GenStep1.module.scss'
+import { useSelector } from 'react-redux';
 
 export default function GenStep1({ charA, setCharA, charB, setCharB }) {
-    const Crab = {
-        name: '큐랩이',
-        description: '호기심 많고 똑똑한 꽃게',
-        img: CrabImg,
-        grayImg: CrabGrayImg,
-    }
-
-    const Octopus = {
-        name: '무너',
-        description: '츤데레 문어',
-        img: OctopusImg,
-        grayImg: OctopusGrayImg,
-    }
-
-    const StarFish = {
-        name: '윙클',
-        description: '장난기 많은 불가사리',
-        img: StarFishImg,
-        grayImg: StarFishGrayImg,
-    }
-
-    const Fish = {
-        name: '벌룬',
-        description: '소심하고 걱정이 많은 복어',
-        img: FishImg,
-        grayImg: FishGrayImg,
-    }
+    const Crab = useSelector((state) => state.crab);
+    const Octopus = useSelector((state) => state.octopus);
+    const StarFish = useSelector((state) => state.starFish);
+    const Fish = useSelector((state) => state.fish);
 
     const [selectedChar, setSelectedChar] = useState(Crab);
     
@@ -63,12 +33,12 @@ export default function GenStep1({ charA, setCharA, charB, setCharB }) {
                     <div className={styles.characterTypeContainer}>
                         {characterA.map((type, idx) => (
                             <button className={`${styles.characterTypeButton} 
-                                                ${idx==charA ? styles.selectedTypeButton : ''}`} 
+                                                ${type.name==charA ? styles.selectedTypeButton : ''}`} 
                                     onClick={() => {
-                                            setCharA(idx)
+                                            setCharA(type.name)
                                             setSelectedChar(type)
                                         }} key={idx}>
-                                <img src={idx==charA ? type.img : type.grayImg} />       
+                                <img src={type.name==charA ? type.img : type.grayImg} />       
                             </button>
                         ))}
                         {/*index 비교해서 선택된 캐릭터 타입 판별*/}
@@ -78,13 +48,13 @@ export default function GenStep1({ charA, setCharA, charB, setCharB }) {
                     <div className={styles.characterTypeContainer}>
                         {characterB.map((type, idx) => (
                             <button className={`${styles.characterTypeButton} 
-                                                ${idx==charB ? styles.selectedTypeButton : ''}`} 
+                                                ${type.name==charB ? styles.selectedTypeButton : ''}`} 
                                     onClick={() => {
-                                            setCharB(idx)
+                                            setCharB(type.name)
                                             setSelectedChar(type)
                                         }} key={idx}>
                                 {type=="선택 안 함" ? "선택 안 함" :
-                                                    <img src={idx==charB ? type.img : type.grayImg} />}
+                                                    <img src={type.name==charB ? type.img : type.grayImg} />}
                             </button>
                         ))}
                     </div>

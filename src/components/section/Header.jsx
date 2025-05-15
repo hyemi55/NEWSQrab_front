@@ -1,6 +1,6 @@
 import React  from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from 'src/style/section/Header.module.scss';
+import styles from '../../style/section/Header.module.scss';
 
 export default function Header() {
     const navigate = useNavigate();

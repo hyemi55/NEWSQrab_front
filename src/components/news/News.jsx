@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
-import styles from "src/style/news/News.module.scss";
-import VideoList from "src/components/news/VideoList";
+import styles from "../../style/news/News.module.scss";
+import VideoList from "./VideoList";
 
 export default function News() {
     const [category, setCategory] = useState('pick');

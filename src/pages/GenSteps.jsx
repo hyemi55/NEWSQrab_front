@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
-import styles from 'src/style/pages/GenSteps.module.scss';
+import { useNavigate } from 'react-router-dom';
+import styles from '../style/pages/GenSteps.module.scss';
 import GenStep1 from '../components/generator/gen-steps/GenStep1';
 import GenStep2 from '../components/generator/gen-steps/GenStep2';
 import GenStep3 from '../components/generator/gen-steps/GenStep3';
-import { useNavigate } from 'react-router-dom';
 import Result from '../components/generator/gen-steps/Result';
 
 export default function GenSteps() {
     const [step, setStep] = useState(1);
-    const [charA, setCharA] = useState(0);
-    const [charB, setCharB] = useState(0); 
+    const [charA, setCharA] = useState('큐랩이');
+    const [charB, setCharB] = useState('윙클'); 
     const [conversation, setConversation] = useState({});
     const [conversationId, setConversationId] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     
     const navigate = useNavigate();
 
@@ -22,6 +23,8 @@ export default function GenSteps() {
     ];
 
     const handleNextClick = function() {
+        setIsLoading(true);
+
         if (step < 3) setStep(step+1);
         else navigate("result");
     }
@@ -45,8 +48,10 @@ export default function GenSteps() {
             </div>
 
             {step==1 ? <GenStep1 charA={charA} setCharA={setCharA} charB={charB} setCharB={setCharB} /> :
-            step==2 ? <GenStep2 conversation={conversation}  setConversation={setConversation}
-                                setConversationId={setConversationId}/> :
+            step==2 ? <GenStep2 charA={charA} charB={charB}
+                                conversation={conversation}  setConversation={setConversation}
+                                setConversationId={setConversationId}
+                                isLoading={isLoading} setIsLoading={setIsLoading}/> :
                     <Result conversationId={conversationId}/>}
 
             
@@ -54,7 +59,7 @@ export default function GenSteps() {
             {step <= 2 ?
                 <div className={styles.stepButtonContainer}>
                     <button className={styles.previousButton} onClick={handlePreviousClick}>이전</button>
-                    <button className={styles.nextButton} onClick={handleNextClick}>다음</button>
+                    <button className={`${styles.nextButton} ${isLoading ? styles.inActiveButton : ''}` } onClick={handleNextClick}>다음</button>
                 </div> : <div/>}
         </div>
     )

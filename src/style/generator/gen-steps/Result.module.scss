@@ -19,6 +19,18 @@
     border-radius: 26.5487px;
 }
 
+.altVideoText {
+    width: 274px;
+    height: 439px;
+
+    background-color: transparent;
+    border: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .buttonContainer {
     display: flex;
     flex-direction: row;

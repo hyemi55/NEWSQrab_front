@@ -1,11 +1,11 @@
-import CrabImg from "src/assets/img/crab.png";
-import CrabGrayImg from 'src/assets/img/crab_gray.png';
-import OctopusImg from "src/assets/img/octopus.png";
-import OctopusGrayImg from 'src/assets/img/octopus_gray.png';
-import FishImg from "src/assets/img/fish.png";
-import FishGrayImg from 'src/assets/img/fish_gray.png';
-import StarFishImg from "src/assets/img/starfish.png";
-import StarFishGrayImg from 'src/assets/img/starfish_gray.png';
+import CrabImg from "../../assets/img/crab.png";
+import CrabGrayImg from '../../assets/img/crab_gray.png';
+import OctopusImg from "../../assets/img/octopus.png";
+import OctopusGrayImg from '../../assets/img/octopus_gray.png';
+import FishImg from "../../assets/img/fish.png";
+import FishGrayImg from '../../assets/img/fish_gray.png';
+import StarFishImg from "../../assets/img/starfish.png";
+import StarFishGrayImg from '../../assets/img/starfish_gray.png';
 
 const Crab = {
     name: '큐랩이',

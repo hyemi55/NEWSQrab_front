@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import styles from 'src/style/generator/Generator.module.scss'
+import styles from '../../style/generator/Generator.module.scss'
 
 export default function Generator({ setIsLogin }) {
     const navigate = useNavigate();
@@ -48,7 +48,7 @@ export default function Generator({ setIsLogin }) {
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                 />
-                <button type="submit">{!isLoading ? '영상 만들기' : '크롤링 중'}</button>
+                <button type="submit" className={isLoading ? styles.inActiveButton : ""}>{!isLoading ? '영상 만들기' : '기사 읽는 중'}</button>
             </form>
         </div>
     )
