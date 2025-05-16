@@ -26,9 +26,6 @@ export default function Result({ conversationId }) {
                 await axios.post(`${import.meta.env.VITE_BACKEND_URL}/reels/${conversationId}/add-subtitles`);
                 const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/reels/${conversationId}/finalize`, postDataForFinalize);
                 setUrl(response.data.reelsUrl);
-
-                console.log(response.data);
-    
     
             } catch (error) {
                 console.log("conversation 수정 에러: ", error);
@@ -55,7 +52,7 @@ export default function Result({ conversationId }) {
             a.remove();
             window.URL.revokeObjectURL(url);
         } catch (error) {
-            console.error('다운로드 실패:', error);
+            console.log('다운로드 실패:', error);
         }
     }
 

@@ -9,6 +9,7 @@ import UpArrow from '../assets/img/up_arrow.png';
 import DownArrow from '../assets/img/down_arrow.png';
 import SoundVolume from '../assets/img/soundVolume.png';
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { current } from "@reduxjs/toolkit";
 
 export default function Video() {
     const videoRef = useRef(null);
@@ -33,11 +34,9 @@ export default function Video() {
         const fetchReelsDetails = async () => {
             try {
                 const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/reels/${reelsId}/details`);
-                console.log(response.data);
                 setConversation(response.data.conversation.script)
                 setArticleUrl(response.data.articleUrl);
 
-                console.log(response.data);
             } catch (error) {
                 console.error('reels 디테일 불러오기 에러:', error);
             }
@@ -48,22 +47,26 @@ export default function Video() {
 
     const handleUpClick = async () => {
       const upReelsData = reelsDataList[currentIndex - 1];
-      navigate(`/reels/${upReelsData._id}`, {
+      if (currentIndex != 0) {  
+        navigate(`/reels/${upReelsData._id}`, {
                             state: {
                                 currentIndex: currentIndex - 1,
                                 reelsDataList: reelsDataList,
                             }
-              })
+                })
+              }
     }
 
     const handleDownClick = async () => {
       const downReelsData = reelsDataList[currentIndex + 1];
-      navigate(`/reels/${downReelsData._id}`, {
+      if (currentIndex != reelsDataList.length) {
+        navigate(`/reels/${downReelsData._id}`, {
                             state: {
                                 currentIndex: currentIndex + 1,
                                 reelsDataList: reelsDataList,
                             }
               })
+            }
     }
 
     const toggleMute = () => {

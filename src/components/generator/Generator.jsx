@@ -11,8 +11,6 @@ export default function Generator({ setIsLogin }) {
     const handleSubmit = async function(event) {
         event.preventDefault();
 
-        console.log(localStorage.getItem("accessToken"));
-
         if (!localStorage.getItem("accessToken")) {
             setIsLogin(true);
         }
@@ -35,8 +33,9 @@ export default function Generator({ setIsLogin }) {
                     navigate(`/generating/${articleId}`);
                 }
             } catch (error) {
-                console.error('에러:', error);
+                console.log('에러:', error);
                 setIsLoading(false);
+                alert("기사 내용을 찾을 수 없습니다")
             }
         }
     }

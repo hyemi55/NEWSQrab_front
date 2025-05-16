@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setUserName } from '../../redux/modules/user.jsx';
 import styles from "../../style/users/UserModal.module.scss"
 import UserIcon from "../../assets/img/user.png";
+import { useNavigate } from 'react-router-dom';
 
 export default function UserModal({ isLogin, setIsLogin }) {
     const dispatch = useDispatch();
@@ -72,7 +73,7 @@ export default function UserModal({ isLogin, setIsLogin }) {
                                                                                                                 localStorage.removeItem("accessToken"); 
                                                                                                                 setUsername("~"); 
                                                                                                                 setPassword("~");
-                                                                                                            }}><img src={UserIcon} /></button>
+                                                                                                            }}>{/*<img src={UserIcon} />*/}로그아웃</button>
             }
 
             {isLogin && (
