@@ -20,24 +20,24 @@ export default function GenStep2({ charA, charB, conversation, setConversation, 
                 const response1 = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/original`, postDataForOriginal);
 
                 // 백엔드 서버 배포되면 삭제할 것
-                setConversation(response1.data.script);
-                setParentId(response1.data._id);
-                setConversationId(response1.data._id);
-                setIsLoading(false);
+                // setConversation(response1.data.script);
+                // setParentId(response1.data._id);
+                // setConversationId(response1.data._id);
+                // setIsLoading(false);
 
 
                 // 백엔드 rag 코드 없어서 안 됨. 백엔드 서버 배포되면 주석 제거
-                // const parentConversationId = response1.data._id;
-                // const postDataForRag = {
-                //     articleId: articleId,
-                //     parentConversationId: parentConversationId,
-                // }
-                // const response2 = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/rag-modified`, postDataForRag);
+                const parentConversationId = response1.data._id;
+                const postDataForRag = {
+                    articleId: articleId,
+                    parentConversationId: parentConversationId,
+                }
+                const response2 = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/rag-modified`, postDataForRag);
 
-                // setConversation(response2.data.script);
-                // setParentId(response2.data._id);
-                // setConversationId(response2.data._id);
-                // setIsLoading(false);
+                setConversation(response2.data.script);
+                setParentId(response2.data._id);
+                setConversationId(response2.data._id);
+                setIsLoading(false);
 
             } catch (error) {
                 console.log("conversation 불러오기 에러: ", error);

@@ -8,8 +8,6 @@ export default function Home() {
     const [branch, setBranch] = useState('news');
     const [isLogin, setIsLogin] = useState(false);    
 
-    console.log(localStorage.getItem('accessToken'));
-
     const classNameHandler = function(branchButton) {
         if (branchButton == branch) return styles.selectedBranchButton;
         else return '';

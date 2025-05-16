@@ -9,7 +9,6 @@ import UpArrow from '../assets/img/up_arrow.png';
 import DownArrow from '../assets/img/down_arrow.png';
 import SoundVolume from '../assets/img/soundVolume.png';
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { current } from "@reduxjs/toolkit";
 
 export default function Video() {
     const videoRef = useRef(null);
@@ -18,12 +17,16 @@ export default function Video() {
     const { reelsId } = useParams();
     const { currentIndex, reelsDataList } = location.state || {};
     const currentReelsData = reelsDataList[currentIndex];
+    const [reelsUrl, setReelsUrl] = useState(null);
     const [conversation, setConversation] = useState({});
     const [articleUrl, setArticleUrl] = useState();
     const [muted, setMuted] = useState(false);
     const [isSeeConversation, setIsSeeConversation] = useState(false);
+    const [hasCurrentIndex, setHasCurrentIndex] = useState(false);
 
     useEffect(() => {
+        if (currentIndex) setHasCurrentIndex(true);
+
         // 백엔드와 데이터 통신
         try {
           axios.put(`${import.meta.env.VITE_BACKEND_URL}/reels/${reelsId}/views`);
@@ -32,14 +35,14 @@ export default function Video() {
         }
 
         const fetchReelsDetails = async () => {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/reels/${reelsId}/details`);
-                setConversation(response.data.conversation.script)
-                setArticleUrl(response.data.articleUrl);
-
-            } catch (error) {
-                console.error('reels 디테일 불러오기 에러:', error);
-            }
+          try {
+              const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/reels/${reelsId}/details`);
+              setReelsUrl(response.data.reels.reelsUrl);
+              setConversation(response.data.conversation.script)
+              setArticleUrl(response.data.articleUrl);
+          } catch (error) {
+            console.error('reels 디테일 불러오기 에러:', error);
+          }
         }
 
         fetchReelsDetails();
@@ -59,14 +62,14 @@ export default function Video() {
 
     const handleDownClick = async () => {
       const downReelsData = reelsDataList[currentIndex + 1];
-      if (currentIndex != reelsDataList.length) {
+      if (currentIndex != reelsDataList.length-1) {
         navigate(`/reels/${downReelsData._id}`, {
                             state: {
                                 currentIndex: currentIndex + 1,
                                 reelsDataList: reelsDataList,
                             }
               })
-            }
+      }
     }
 
     const toggleMute = () => {
@@ -103,19 +106,23 @@ export default function Video() {
         <img className={styles.backImg} src={BackImg}/>
         <button className={styles.backButton} onClick={() => navigate('/')}><img src={Xicon} alt="뒤로가기" /></button>
         <div className={styles.videoContainer}>
+          {reelsUrl||reelsDataList[currentIndex].reelsUrl ? 
           <video ref={videoRef} className={styles.video} controls controlsList="nodownload">
-            <source src={currentReelsData.reelsUrl} type="video/mp4" />
+            <source src={reelsUrl ? reelsUrl : reelsDataList[currentIndex].reelsUrl} type="video/mp4" />
             비디오를 지원하지 않는 브라우저입니다.
-          </video>
-          
+          </video> : <div />
+          }
         </div>
         <div className={styles.rightContainer}>
           <div className={styles.bar}>
             <button onClick={() => setIsSeeConversation(!isSeeConversation)}><img src={ConversationIcon} alt="대사 보기" /></button>
+            {hasCurrentIndex >= 0 ? 
             <div className={styles.moveButtonContainer}>
               <button className={styles.moveButton} onClick={handleUpClick}><img src={UpArrow} alt="이전 동영상 보기" /></button>
               <button className={styles.moveButton} onClick={handleDownClick}><img src={DownArrow} alt="다음 동영상 보기" /></button>
             </div>
+            :
+            <div />}
             <button className={styles.soundButton} onClick={toggleMute}><img src={SoundVolume} alt="음량 조절" /></button>
           </div>
 

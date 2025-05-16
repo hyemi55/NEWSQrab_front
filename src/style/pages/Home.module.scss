@@ -1,3 +1,9 @@
+@mixin respond($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: 480px) { @content; }
+  }
+}
+
 .container {
     flex: 1;    //#root의 자식. #root가 display: flex;를 가짐.
 }
