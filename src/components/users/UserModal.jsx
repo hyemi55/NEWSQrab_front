@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function UserModal({ isLogin, setIsLogin }) {
     const dispatch = useDispatch();
+    const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken"));
     const [isRegister, setIsRegister] = useState(false);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -28,6 +29,8 @@ export default function UserModal({ isLogin, setIsLogin }) {
             dispatch(setUserName(username));
 
             setIsLogin(false);
+
+            setAccessToken(localStorage.getItem("accessToken"));
 
         } catch (error) {
             alert('잘못된 아이디 또는 비밀번호입니다')
@@ -64,22 +67,21 @@ export default function UserModal({ isLogin, setIsLogin }) {
 
     return (
         <div>
-            {!localStorage.getItem("accessToken") ? <button className={styles.loginButton} onClick={() => { 
-                                                                                                                setIsLogin(true);
-                                                                                                                setUsername("");
-                                                                                                                setPassword("");
-                                                                                                            }}>로그인</button> :
+            {!accessToken ? <button className={styles.loginButton} onClick={() => { 
+                                                                                    setIsLogin(true);
+                                                                                    setUsername("");
+                                                                                    setPassword("");
+                                                                            }}>로그인</button> :
                                                     <button className={styles.profileButton} onClick={() => {
                                                                                                                 localStorage.removeItem("accessToken"); 
-                                                                                                                setUsername("~"); 
-                                                                                                                setPassword("~");
+                                                                                                                setAccessToken(null);
                                                                                                             }}>{/*<img src={UserIcon} />*/}로그아웃</button>
             }
 
             {isLogin && (
                 <div className={styles.backdrop}>
-                    <form className={styles.modal}>
-                        <button className={styles.XButton} onClick={() => setIsLogin(false)}>×</button>
+                    <form className={styles.modal} onSubmit={isRegister ? handleRegisterClick : handleLoginClick}>
+                        <button type="button" className={styles.XButton} onClick={() => setIsLogin(false)}>×</button>
                         <div className={styles.logo}>News<span style={{ color: "#FF432A" }}>Q</span>rab</div>
                         {isRegister && (
                             <input type='text' placeholder="프로필 이미지 URL" className={styles.input} 
@@ -95,10 +97,10 @@ export default function UserModal({ isLogin, setIsLogin }) {
                         )}
                         {!isRegister ? (
                             <>
-                            <button className={styles.modalLoginButton} onClick={handleLoginClick}>로그인</button>
+                            <button className={styles.modalLoginButton}>로그인</button>
                             <button className={styles.modalRegisterButtonGray} onClick={handleRegisterGrayClick}>회원가입</button>
                             </>
-                        ) : <button className={styles.modalRegisterButton} onClick={handleRegisterClick}>회원가입</button>
+                        ) : <button className={styles.modalRegisterButton}>회원가입</button>
                         }
                     </form>
                 </div>
