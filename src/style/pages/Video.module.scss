@@ -1,3 +1,5 @@
+@use "../mixin" as *;
+
 .container {
     flex: 1;
 
@@ -46,6 +48,10 @@
 
     padding: 0px;
 
+    @include respond(mobile) {
+        z-index: 1000;
+    }
+
     img {
         position: relative;
         top: 2px;
@@ -85,6 +91,10 @@
 
     position: absolute;
     right: 0;
+
+    @include respond(mobile) {
+        height: 100vh;
+    }
 }
 
 .bar {
@@ -98,6 +108,10 @@
     padding: 20px;
 
     background: transparent;
+
+    @include respond(mobile) {
+        padding: 20px 10px;
+    }
 
     button {
         width: 40px;
@@ -126,6 +140,10 @@
 
 .soundButton {
     margin-top: auto;
+
+    @include respond(mobile) {
+        margin-bottom: 50px;
+    }
 }
 
 .conversationContainer {
@@ -157,6 +175,19 @@
 
         button {
             margin-left: auto;
+        }
+
+        .closeConversationButton {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(80, 80, 80, 0.6);
+            padding: 0px;
+
+            img {
+                position: relative;
+                top: 2px;
+            }
         }
     }
 

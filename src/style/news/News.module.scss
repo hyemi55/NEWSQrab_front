@@ -1,3 +1,5 @@
+@use "../mixin" as *;
+
 .container {
     // width: 907.2px;
     display: flex;
@@ -11,6 +13,10 @@
 
     margin-top: 62px;
     margin-bottom: 10px;
+
+    @include respond(mobile) {
+        font-size: 30px;
+    }
 }
 
 .introduction {
@@ -35,6 +41,10 @@
     margin-bottom: 21px;
 
     font-size: 15px;
+
+    @include respond(mobile) {
+        margin-top: 40px;
+    }
 }
 
 .categoryButtonContainer button {

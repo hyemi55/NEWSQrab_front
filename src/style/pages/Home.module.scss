@@ -1,11 +1,12 @@
-@mixin respond($breakpoint) {
-  @if $breakpoint == mobile {
-    @media (max-width: 480px) { @content; }
-  }
-}
+@use "../mixin" as *;
 
 .container {
     flex: 1;    //#root의 자식. #root가 display: flex;를 가짐.
+
+    @include respond(mobile) {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .branchButtonContainer {
@@ -24,4 +25,8 @@
 .selectedBranchButton {
     color: #FF543D;
     font-weight: 600;
+
+    @include respond(mobile) {
+        display: none;
+    }
 }

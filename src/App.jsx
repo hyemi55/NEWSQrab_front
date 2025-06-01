@@ -5,11 +5,16 @@ import Home from "./pages/Home"
 import GenSteps from "./pages/GenSteps"
 import Video from "./pages/Video.jsx";
 import DownloadTest from "./DownloadTest.jsx";
+import { useEffect } from "react";
 
 
 function AppRoutes() {
   const location = useLocation();
   const hideHeader = location.pathname.startsWith('/reels/');
+
+  useEffect(() => {
+    document.title = "NewsQrab"
+  }, [])
 
   return (
     <>

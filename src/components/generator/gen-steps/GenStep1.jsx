@@ -18,15 +18,19 @@ export default function GenStep1({ charA, setCharA, charB, setCharB }) {
             <div className={styles.title}>어떤 캐릭터로 만들어 볼까?</div>
 
             <div className={styles.mainContentContainer}>
-                <div>
-                    {selectedChar=="선택 안 함" ? <div/>:
-                        <div className={styles.viewChar} >
-                            <img src={selectedChar.img}/>
-                            <div className={styles.selectedCharName}>{selectedChar.name}</div>
-                            <div className={styles.selectedCharDescription}>{selectedChar.description}</div>
-                        </div>
-                    }
-                </div>
+                {selectedChar=="선택 안 함" ? 
+                    <div className={styles.viewChar} >
+                        <div className={styles.altImg} />
+                        <div className={styles.selectedCharName}></div>
+                        <div className={styles.selectedCharDescription}></div>
+                    </div> 
+                    :
+                    <div className={styles.viewChar} >
+                        <img src={selectedChar.img}/>
+                        <div className={styles.selectedCharName}>{selectedChar.name}</div>
+                        <div className={styles.selectedCharDescription}>{selectedChar.description}</div>
+                    </div>
+                }
 
                 <div className={styles.customContainer}>
                     <div className={styles.label}>캐릭터A 선택<span> (설명 담당)</span></div>

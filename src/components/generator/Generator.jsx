@@ -1,10 +1,12 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useMediaQuery } from 'react-responsive';
 import styles from '../../style/generator/Generator.module.scss'
 
 export default function Generator({ setIsLogin }) {
     const navigate = useNavigate();
+    const isMobile = useMediaQuery({ maxWidth: 480 });
     const [isLoading, setIsLoading] = useState(false);
     const [url, setUrl] = useState("");
 
@@ -42,7 +44,9 @@ export default function Generator({ setIsLogin }) {
 
     return (
         <div className={styles.container}>
-            <div className={styles.title}>어려운 IT·과학 이야기, 숏폼으로 만들어 봐!</div>
+            <div className={styles.title}>
+                어려운 IT·과학 이야기,{isMobile && <br/>}숏폼으로 만들어 봐!
+            </div>
             <form onSubmit={handleSubmit}>
                 <input
                     placeholder='뉴스 링크 붙여넣기'

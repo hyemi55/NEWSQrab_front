@@ -9,11 +9,13 @@ import UpArrow from '../assets/img/up_arrow.png';
 import DownArrow from '../assets/img/down_arrow.png';
 import SoundVolume from '../assets/img/soundVolume.png';
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 export default function Video() {
     const videoRef = useRef(null);
     const location = useLocation();
     const navigate = useNavigate();
+    const isMobile = useMediaQuery({ maxWidth: 480 });
     const { reelsId } = useParams();
     const { currentIndex, reelsDataList } = location.state || {};
     const currentReelsData = reelsDataList[currentIndex];
@@ -104,7 +106,9 @@ export default function Video() {
     return (
       <div className={styles.container}>
         <img className={styles.backImg} src={BackImg}/>
-        <button className={styles.backButton} onClick={() => navigate('/')}><img src={Xicon} alt="뒤로가기" /></button>
+        {(!isMobile||!isSeeConversation) &&
+          <button className={styles.backButton} onClick={() => navigate('/')}><img src={Xicon} alt="뒤로가기" /></button>
+        }
         <div className={styles.videoContainer}>
           {reelsUrl||reelsDataList[currentIndex].reelsUrl ? 
           <video ref={videoRef} className={styles.video} controls controlsList="nodownload">
@@ -114,6 +118,7 @@ export default function Video() {
           }
         </div>
         <div className={styles.rightContainer}>
+          {(!isMobile||!isSeeConversation) &&
           <div className={styles.bar}>
             <button onClick={() => setIsSeeConversation(!isSeeConversation)}><img src={ConversationIcon} alt="대사 보기" /></button>
             {hasCurrentIndex >= 0 ? 
@@ -124,7 +129,7 @@ export default function Video() {
             :
             <div />}
             <button className={styles.soundButton} onClick={toggleMute}><img src={SoundVolume} alt="음량 조절" /></button>
-          </div>
+          </div>}
 
           {isSeeConversation && (
               <div className={styles.conversationContainer}>
@@ -132,6 +137,7 @@ export default function Video() {
                 <div className={styles.extraUIContainer}>
                   <div>{timeAgo(currentReelsData.createdAt)} | {currentReelsData.views}회</div>
                   {/* <button className={styles.shareButton}><img src={ShareButton} alt="공유 버튼"/></button> */}
+                  {isMobile && <button className={styles.closeConversationButton} onClick={() => setIsSeeConversation(!isSeeConversation)}><img src={Xicon} alt="대사 닫기" /></button>}
                 </div>
                 <div className={styles.conversation}>
                   {conversation.map((lineObj, index) => {

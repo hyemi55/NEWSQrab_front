@@ -1,3 +1,5 @@
+@use "../mixin" as *;
+
 .container {
     height: 100vh;
     width: 100vw;
@@ -7,6 +9,12 @@
     justify-content: center;
     align-items: center;
     gap: 68px;
+
+    @include respond(mobile) {
+        flex: 1;
+        position: relative;
+        top: 20px;
+    }
 }
 
 .title {
@@ -15,6 +23,12 @@
 
     position: relative;
     bottom: 62px;
+
+    @include respond(mobile) {
+        padding: 0px;
+        text-align: center;
+        font-size: 30px;
+    }
 }
 
 .container form {
@@ -33,6 +47,10 @@
     position: relative;
     bottom: 62px;
 
+    @include respond(mobile) {
+        width: 90%;
+    }
+
     input {
         margin-left: 20px;
         border: 0px;
@@ -41,6 +59,10 @@
 
         &:focus {
             outline: none;
+        }
+
+        @include respond(mobile) {
+            margin: 10px;
         }
     }
 
@@ -56,6 +78,13 @@
         border-radius: 15px;
 
         font-size: 17px;
+
+        @include respond(mobile) {
+            width: auto;
+            font-size: 15px;
+            padding: 0px 10px;
+            white-space: nowrap;
+        }
     }
 }
 

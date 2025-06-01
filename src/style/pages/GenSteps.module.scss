@@ -1,3 +1,4 @@
+@use "../mixin" as *;
 .container {
     flex: 1; //#root의 자식. #root가 display: flex;를 가짐.
 
@@ -5,7 +6,9 @@
     flex-direction: column;
     align-items: center;
 
-    // width: 1145px;
+    @include respond(mobile) {
+        width: 100vw;
+    }
 }
 
 .stepUIContainer {
@@ -14,9 +17,18 @@
     align-items: center;
     padding: 0px;
     gap: 11px;
+
+    @include respond(mobile) {
+        box-sizing: border-box;
+        padding: 0px 10px;
+        width: 100vw;
+        gap: 5px;
+    }
 }
 
 .stepUI {
+    flex: 1;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,6 +44,10 @@
     gap: 7px;
 
     margin-bottom: 6px;
+
+    @include respond(mobile) {
+        margin-bottom: 0px;
+    }
 }
 
 .stepUINum {
@@ -45,6 +61,14 @@
 
     text-align: center;
     line-height: 27px;
+
+    @include respond(mobile) {
+        width: 15px;
+        height: 15px;
+        line-height: 15px;
+
+        font-size: 10px;
+    }
 }
 
 .stepUIText {
@@ -58,6 +82,9 @@
     line-height: 30px;
 
     color: #202020;
+    @include respond(mobile) {
+        font-size: 10px;
+    }
 }
 
 .stepUIBar {
@@ -66,6 +93,10 @@
 
     background: #202020;
     border-radius: 15px;
+
+    @include respond(mobile) {
+        width: 100%;
+    }
 }
 
 .passedStep {
@@ -91,7 +122,13 @@
     justify-content: end;
 
     margin-top: 10px;
-    margin-right: 30px;;
+    margin-right: 30px;
+
+     @include respond(mobile) {
+        justify-content: center;
+        align-items: center;
+        margin: 15px 0;
+    }
 
     button {
         box-sizing: border-box;

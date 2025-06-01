@@ -4,7 +4,7 @@ import styles from "../../style/news/News.module.scss";
 import VideoList from "./VideoList";
 
 export default function News() {
-    const [category, setCategory] = useState('pick');
+    const [category, setCategory] = useState('view');
 
     return (
         <div className={styles.container}>
@@ -15,14 +15,8 @@ export default function News() {
             
 
             <div className={styles.categoryButtonContainer}>
-                <button onClick={()=>setCategory('pick')} className={category=='pick' ? styles.selectedCategoryButton : ""}>Qrab Pick!</button>
-                <button onClick={()=>setCategory('all')} className={category=='all' ? styles.selectedCategoryButton : ""}>전체</button>
-                <button onClick={()=>setCategory('ai')} className={category=='ai' ? styles.selectedCategoryButton : ""}>AI</button>
-                <button onClick={()=>setCategory('robot')} className={category=='robot' ? styles.selectedCategoryButton : ""}>로봇</button>
-                <button onClick={()=>setCategory('app')} className={category=='app' ? styles.selectedCategoryButton : ""}>앱 트렌드</button>
-                <button onClick={()=>setCategory('bio')} className={category=='bio' ? styles.selectedCategoryButton : ""}>생명</button>
-                <button onClick={()=>setCategory('aero')} className={category=='aero' ? styles.selectedCategoryButton : ""}>항공·우주</button>
-                <button onClick={()=>setCategory('env')} className={category=='env' ? styles.selectedCategoryButton : ""}>환경</button>
+                <button onClick={()=>setCategory('view')} className={category=='view' ? styles.selectedCategoryButton : ""}>인기순</button>
+                <button onClick={()=>setCategory('latest')} className={category=='latest' ? styles.selectedCategoryButton : ""}>최신순</button>
             </div>
 
             <VideoList category={category} />
