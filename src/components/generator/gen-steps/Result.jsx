@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux';
 export default function Result({ conversationId }) {
     const { articleId } = useParams();
     const username = useSelector((state) => state.user.username);
+    const char1 = useSelector((state) => state.characters.char1);
+    const char2 = useSelector((state) => state.characters.char2);
     const [url, setUrl] = useState("");
 
     useEffect(() => {
@@ -14,8 +16,8 @@ export default function Result({ conversationId }) {
             const postDataForFinalize = {
                     articleId: articleId,
                     owner: username,
-                    character1: "크랩이",
-                    character2: "복어",
+                    character1: char1.species,
+                    character2: char2.species,
                     createdBy: username,
                 }
 
@@ -65,12 +67,15 @@ export default function Result({ conversationId }) {
             <div className={styles.title}>완성~ 내 뉴스를 업로드해볼까?</div>
             
             {!url=="" ? <video src={url} controls className={styles.video}/>
-                        : <div className={styles.altVideoText}>영상 생성 중...</div>}
+                        : <div className={styles.altVideoContianer}>
+                            <div className={styles.altVideoText}>{char1.name} & {char2.name}가<br/>열심히 영상 생성 중...</div>
+                            <div className={styles.spinner} />
+                        </div>}
 
-            <div className={styles.buttonContainer}>
-                {/* <button className={styles.downloadButton} onClick={handleDownloadClick}>다운로드</button> */}
-                {/* <button className={styles.uploadButton} onClick={handleUploadClick}>업로드</button> */}
-            </div>
+            {/* <div className={styles.buttonContainer}>
+                <button className={styles.downloadButton} onClick={handleDownloadClick}>다운로드</button>
+                <button className={styles.uploadButton} onClick={handleUploadClick}>업로드</button>
+            </div> */}
         </div>
     )
 }

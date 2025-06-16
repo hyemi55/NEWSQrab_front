@@ -1,17 +1,16 @@
 import React, {useState} from 'react'
 import styles from '../../../style/generator/gen-steps/GenStep1.module.scss'
-import { useSelector } from 'react-redux';
+import { Crab, Octopus, StarFish, Bok, setChar1, setChar2 } from "../../../redux/modules/character.jsx"
+import { useDispatch, useSelector } from 'react-redux';
 
-export default function GenStep1({ charA, setCharA, charB, setCharB }) {
-    const Crab = useSelector((state) => state.crab);
-    const Octopus = useSelector((state) => state.octopus);
-    const StarFish = useSelector((state) => state.starFish);
-    const Fish = useSelector((state) => state.fish);
-
+export default function GenStep1() {
     const [selectedChar, setSelectedChar] = useState(Crab);
+    const char1 = useSelector((state) => state.characters.char1);
+    const char2 = useSelector((state) => state.characters.char2);
+    const dispatch = useDispatch();
     
-    const characterA = [Crab, Octopus];
-    const characterB = [StarFish, Fish, "선택 안 함"];
+    const character1 = [Crab, Octopus];
+    const character2 = [StarFish, Bok, "선택 안 함"];
 
     return (
         <div className={styles.container}>
@@ -25,7 +24,10 @@ export default function GenStep1({ charA, setCharA, charB, setCharB }) {
                         <div className={styles.selectedCharDescription}></div>
                     </div> 
                     :
-                    <div className={styles.viewChar} >
+                    <div className={`${styles.viewChar} ${selectedChar == Crab ? styles.crab : 
+                                                            selectedChar == Octopus ? styles.octopus :
+                                                            selectedChar == StarFish ? styles.starfish :
+                                                                                        styles.bok}`} >
                         <img src={selectedChar.img}/>
                         <div className={styles.selectedCharName}>{selectedChar.name}</div>
                         <div className={styles.selectedCharDescription}>{selectedChar.description}</div>
@@ -35,14 +37,14 @@ export default function GenStep1({ charA, setCharA, charB, setCharB }) {
                 <div className={styles.customContainer}>
                     <div className={styles.label}>캐릭터A 선택<span> (설명 담당)</span></div>
                     <div className={styles.characterTypeContainer}>
-                        {characterA.map((type, idx) => (
+                        {character1.map((type, idx) => (
                             <button className={`${styles.characterTypeButton} 
-                                                ${type.name==charA ? styles.selectedTypeButton : ''}`} 
+                                                ${type==char1 ? styles.selectedTypeButton : ''}`} 
                                     onClick={() => {
-                                            setCharA(type.name)
+                                            dispatch(setChar1(type))
                                             setSelectedChar(type)
                                         }} key={idx}>
-                                <img src={type.name==charA ? type.img : type.grayImg} />       
+                                <img src={type==char1 ? type.img : type.grayImg} />       
                             </button>
                         ))}
                         {/*index 비교해서 선택된 캐릭터 타입 판별*/}
@@ -50,15 +52,15 @@ export default function GenStep1({ charA, setCharA, charB, setCharB }) {
                     
                     <div className={styles.label}>캐릭터B 선택<span> (리액션 담당)</span></div>
                     <div className={styles.characterTypeContainer}>
-                        {characterB.map((type, idx) => (
+                        {character2.map((type, idx) => (
                             <button className={`${styles.characterTypeButton} 
-                                                ${type.name==charB ? styles.selectedTypeButton : ''}`} 
+                                                ${type==char2 ? styles.selectedTypeButton : ''}`} 
                                     onClick={() => {
-                                            setCharB(type.name)
+                                            dispatch(setChar2(type))
                                             setSelectedChar(type)
                                         }} key={idx}>
                                 {type=="선택 안 함" ? "선택 안 함" :
-                                                    <img src={type.name==charB ? type.img : type.grayImg} />}
+                                                    <img src={type==char2 ? type.img : type.grayImg} />}
                             </button>
                         ))}
                     </div>

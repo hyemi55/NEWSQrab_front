@@ -26,7 +26,7 @@
     border-radius: 26.5487px;
 }
 
-.altVideoText {
+.altVideoContianer {
     width: 274px;
     height: 439px;
 
@@ -34,8 +34,29 @@
     border: none;
 
     display: flex;
+    flex-direction: column;
+    gap: 10px;
     justify-content: center;
     align-items: center;
+}
+
+.altVideoText {
+    text-align: center;;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 5px solid #ccc;
+  border-top-color: #FF543D;
+  border-radius: 50%;
+  animation: spin 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .buttonContainer {

@@ -8,8 +8,6 @@ import Result from '../components/generator/gen-steps/Result';
 
 export default function GenSteps() {
     const [step, setStep] = useState(1);
-    const [charA, setCharA] = useState('큐랩이');
-    const [charB, setCharB] = useState('윙클'); 
     const [conversation, setConversation] = useState({});
     const [conversationId, setConversationId] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -49,9 +47,8 @@ export default function GenSteps() {
                 ))}
             </div>
 
-            {step==1 ? <GenStep1 charA={charA} setCharA={setCharA} charB={charB} setCharB={setCharB} /> :
-            step==2 ? <GenStep2 charA={charA} charB={charB}
-                                conversation={conversation}  setConversation={setConversation}
+            {step==1 ? <GenStep1 /> :
+            step==2 ? <GenStep2 conversation={conversation}  setConversation={setConversation}
                                 setConversationId={setConversationId}
                                 isLoading={isLoading} setIsLoading={setIsLoading}/> :
                     <Result conversationId={conversationId}/>}

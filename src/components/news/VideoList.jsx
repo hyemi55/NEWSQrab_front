@@ -34,7 +34,7 @@ export default function VideoList({ category }) {
         else if (category == 'latest') {
             const fetchVideos = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/reels/sorted/views`);
+                const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/reels/sorted/latest`);
 
                 setReelsData(response.data);
                 setLoading(false);

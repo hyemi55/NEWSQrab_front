@@ -12,6 +12,14 @@
         display: flex;
         flex-direction: column;
     }
+    @include respond(tablet) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @include respond(desktop) {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 .videoContainer video {

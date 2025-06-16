@@ -2,8 +2,11 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom';
 import styles from '../../../style/generator/gen-steps/GenStep2.module.scss'
+import { useSelector } from 'react-redux';
 
-export default function GenStep2({ charA, charB, conversation, setConversation, setConversationId, isLoading, setIsLoading }) {
+export default function GenStep2({ conversation, setConversation, setConversationId, isLoading, setIsLoading }) {
+    const char1 = useSelector((state) => state.characters.char1);
+    const char2 = useSelector((state) => state.characters.char2);
     const [userInput, setUserInput] = useState("");
     const [userInputArray, setUserInputArray] = useState([]);
     const { articleId } = useParams();
@@ -11,27 +14,24 @@ export default function GenStep2({ charA, charB, conversation, setConversation, 
 
     useEffect(() => {
         const fetchConversation = async () => {
+
             const postDataForOriginal = {
                 articleId: articleId,
-                // articleId: "66a93851a574023e7bbfc565",
+                character1: char1.species,
+                character2: char2.species,
             }
 
             try {
                 const response1 = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/original`, postDataForOriginal);
 
-                // 백엔드 서버 배포되면 삭제할 것
-                // setConversation(response1.data.script);
-                // setParentId(response1.data._id);
-                // setConversationId(response1.data._id);
-                // setIsLoading(false);
-
-
-                // 백엔드 rag 코드 없어서 안 됨. 백엔드 서버 배포되면 주석 제거
                 const parentConversationId = response1.data._id;
                 const postDataForRag = {
                     articleId: articleId,
-                    parentConversationId: parentConversationId,
+                    parentId: parentConversationId,
+                    character1: char1.species,
+                    character2: char2.species,
                 }
+
                 const response2 = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/rag-modified`, postDataForRag);
 
                 setConversation(response2.data.script);
@@ -55,19 +55,30 @@ export default function GenStep2({ charA, charB, conversation, setConversation, 
         setIsLoading(true);
 
         const postDataForModified = {
-            articleId: articleId,
             parentId: parentId,
             userRequest: userInput,
+            articleId: articleId,
+            character1: char1.species,
+            character2: char2.species,
         }
 
         setUserInput("");
 
         try {
-            const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/user-modified`, postDataForModified);
+            const response1 = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/user-modified`, postDataForModified);
+            
+            const parentConversationId = response1.data._id;
+            const postDataForRag = {
+                articleId: articleId,
+                parentId: parentConversationId,
+                character1: char1.species,
+                character2: char2.species,
+            }
+            const response2 = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/rag-modified`, postDataForRag);
 
-            setConversation(response.data.script);
-            setParentId(response.data._id);
-            setConversationId(response.data._id);
+            setConversation(response2.data.script);
+            setParentId(response2.data._id);
+            setConversationId(response2.data._id);
 
         } catch (error) {
             console.log("conversation 수정 에러: ", error);
@@ -82,13 +93,17 @@ export default function GenStep2({ charA, charB, conversation, setConversation, 
             <div className={styles.title}>원하는 톤으로 대화를 수정해 봐!</div>
 
             <div className={styles.mainContentContainer}>
-                <div className={styles.conversationContainer}>
-                    {isLoading ? <div>대화 생성 중...</div> : (
+                <div className={isLoading ? styles.conversationLoadingDiv : styles.conversationContainer}>
+                    {isLoading ? 
+                        <div className={styles.loadingFlexDiv}>
+                            <span><strong>RAG</strong>로 배경지식을 채워, 더 똑똑한 대화를 만들어드릴게요 !</span>
+                            <div className={styles.spinner} />
+                        </div>: (
                         conversation.map((lineObj, index) => {
                             const [speaker, text] = Object.entries(lineObj)[0];
                             return (
                                 <div key={index} className={styles.lineBlock}>
-                                    <strong>{speaker=='user1' ? charB : charA}</strong><br/>
+                                    <strong>{speaker==char1.species ? char1.name : char2.name}</strong><br/>
                                     {text}
                                 </div>
                             );

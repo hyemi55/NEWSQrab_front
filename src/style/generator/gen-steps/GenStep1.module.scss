@@ -47,7 +47,7 @@
     align-items: center;
     justify-content: center;
 
-    background-image: radial-gradient(circle, #ffb99b 20%, white, white);
+    background-image: radial-gradient(circle, #cacaca 20%, white, white);
 
     @include respond(mobile) {
         width: 100%;
@@ -102,6 +102,30 @@
             font-size: 14px;
             top: 0px;
         }
+    }
+}
+.crab {
+    background-image: radial-gradient(circle, #ffb99b 20%, white, white);
+}
+.octopus {
+    background-image: radial-gradient(circle, #aedcbe 20%, white, white);
+    
+    .selectedCharName {
+        color: rgb(9, 169, 20);
+    }
+}
+.starfish {
+    background-image: radial-gradient(circle, #efffc3 20%, white, white);
+    
+    .selectedCharName {
+        color: rgb(255, 183, 0);
+    }
+}
+.bok {
+    background-image: radial-gradient(circle, #f1ccf4 20%, white, white);
+    
+    .selectedCharName {
+        color: rgb(202, 31, 188);
     }
 }
 
