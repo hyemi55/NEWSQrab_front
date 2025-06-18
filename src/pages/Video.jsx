@@ -18,13 +18,19 @@ export default function Video() {
     const isMobile = useMediaQuery({ maxWidth: 480 });
     const { reelsId } = useParams();
     const { currentIndex, reelsDataList } = location.state || {};
-    const currentReelsData = reelsDataList[currentIndex];
     const [reelsUrl, setReelsUrl] = useState(null);
     const [conversation, setConversation] = useState({});
     const [articleUrl, setArticleUrl] = useState();
+    const [createdAt, setCreatedAt] = useState();
+    const [views, setViews] = useState();
     const [muted, setMuted] = useState(false);
     const [isSeeConversation, setIsSeeConversation] = useState(false);
     const [hasCurrentIndex, setHasCurrentIndex] = useState(false);
+
+    // let currentReelsData = null;
+    // if (currentIndex) {
+    //   currentReelsData = reelsDataList[currentIndex];
+    // }
 
     useEffect(() => {
         if (currentIndex) setHasCurrentIndex(true);
@@ -42,6 +48,8 @@ export default function Video() {
               setReelsUrl(response.data.reels.reelsUrl);
               setConversation(response.data.conversation.script)
               setArticleUrl(response.data.articleUrl);
+              setCreatedAt(response.data.conversation.createdAt);
+              setViews(response.data.conversation.__v);
           } catch (error) {
             console.error('reels 디테일 불러오기 에러:', error);
           }
@@ -110,7 +118,7 @@ export default function Video() {
           <button className={styles.backButton} onClick={() => navigate('/')}><img src={Xicon} alt="뒤로가기" /></button>
         }
         <div className={styles.videoContainer}>
-          {reelsUrl||reelsDataList[currentIndex].reelsUrl ? 
+          {reelsUrl||currentIndex ? 
           <video ref={videoRef} className={styles.video} controls controlsList="nodownload">
             <source src={reelsUrl ? reelsUrl : reelsDataList[currentIndex].reelsUrl} type="video/mp4" />
             비디오를 지원하지 않는 브라우저입니다.
@@ -121,7 +129,7 @@ export default function Video() {
           {(!isMobile||!isSeeConversation) &&
           <div className={styles.bar}>
             <button onClick={() => setIsSeeConversation(!isSeeConversation)}><img src={ConversationIcon} alt="대사 보기" /></button>
-            {hasCurrentIndex >= 0 ? 
+            {hasCurrentIndex ? 
             <div className={styles.moveButtonContainer}>
               <button className={styles.moveButton} onClick={handleUpClick}><img src={UpArrow} alt="이전 동영상 보기" /></button>
               <button className={styles.moveButton} onClick={handleDownClick}><img src={DownArrow} alt="다음 동영상 보기" /></button>
@@ -135,7 +143,7 @@ export default function Video() {
               <div className={styles.conversationContainer}>
                 {/* <div className={styles.articleTitle}>제목</div> */}
                 <div className={styles.extraUIContainer}>
-                  <div>{timeAgo(currentReelsData.createdAt)} | {currentReelsData.views}회</div>
+                  <div>{timeAgo(createdAt)} | {views}회</div>
                   {/* <button className={styles.shareButton}><img src={ShareButton} alt="공유 버튼"/></button> */}
                   {isMobile && <button className={styles.closeConversationButton} onClick={() => setIsSeeConversation(!isSeeConversation)}><img src={Xicon} alt="대사 닫기" /></button>}
                 </div>
