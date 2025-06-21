@@ -3,8 +3,6 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { setUserName } from '../../redux/modules/user.jsx';
 import styles from "../../style/users/UserModal.module.scss"
-import UserIcon from "../../assets/img/user.png";
-import { useNavigate } from 'react-router-dom';
 
 export default function UserModal({ isLogin, setIsLogin }) {
     const dispatch = useDispatch();
@@ -75,7 +73,7 @@ export default function UserModal({ isLogin, setIsLogin }) {
                                                     <button className={styles.profileButton} onClick={() => {
                                                                                                                 localStorage.removeItem("accessToken"); 
                                                                                                                 setAccessToken(null);
-                                                                                                            }}>{/*<img src={UserIcon} />*/}로그아웃</button>
+                                                                                                            }}>로그아웃</button>
             }
 
             {isLogin && (

@@ -47,7 +47,6 @@ export default function GenStep1() {
                                 <img src={type==char1 ? type.img : type.grayImg} />       
                             </button>
                         ))}
-                        {/*index 비교해서 선택된 캐릭터 타입 판별*/}
                     </div>
                     
                     <div className={styles.label}>캐릭터B 선택<span> (리액션 담당)</span></div>

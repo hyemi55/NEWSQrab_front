@@ -23,14 +23,8 @@ export default function Video() {
     const [articleUrl, setArticleUrl] = useState();
     const [createdAt, setCreatedAt] = useState();
     const [views, setViews] = useState();
-    const [muted, setMuted] = useState(false);
     const [isSeeConversation, setIsSeeConversation] = useState(false);
     const [hasCurrentIndex, setHasCurrentIndex] = useState(false);
-
-    // let currentReelsData = null;
-    // if (currentIndex) {
-    //   currentReelsData = reelsDataList[currentIndex];
-    // }
 
     useEffect(() => {
         if (currentIndex) setHasCurrentIndex(true);
@@ -85,7 +79,6 @@ export default function Video() {
     const toggleMute = () => {
       const video = videoRef.current;
       video.muted = !video.muted;
-      setMuted(video.muted);
     };
 
     function timeAgo(dateString) {
@@ -141,10 +134,8 @@ export default function Video() {
 
           {isSeeConversation && (
               <div className={styles.conversationContainer}>
-                {/* <div className={styles.articleTitle}>제목</div> */}
                 <div className={styles.extraUIContainer}>
                   <div>{timeAgo(createdAt)} | {views}회</div>
-                  {/* <button className={styles.shareButton}><img src={ShareButton} alt="공유 버튼"/></button> */}
                   {isMobile && <button className={styles.closeConversationButton} onClick={() => setIsSeeConversation(!isSeeConversation)}><img src={Xicon} alt="대사 닫기" /></button>}
                 </div>
                 <div className={styles.conversation}>

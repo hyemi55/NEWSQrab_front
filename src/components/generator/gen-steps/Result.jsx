@@ -36,31 +36,6 @@ export default function Result({ conversationId }) {
 
         fetchVideo();
     }, [])
-    
-    const handleDownloadClick = async () => {
-        try {
-            const response = await axios.get(url,
-                {
-                    responseType: 'blob',
-                }
-            );
-
-            const blobUrl = window.URL.createObjectURL(new Blob([response.data]));
-            const a = document.createElement('a');
-            a.href = blobUrl;
-            a.download = 'my-video.mp4';
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-            window.URL.revokeObjectURL(url);
-        } catch (error) {
-            console.log('다운로드 실패:', error);
-        }
-    }
-
-    const handleUploadClick = () => {
-
-    }
 
     return (
         <div className={styles.container}>
@@ -71,11 +46,6 @@ export default function Result({ conversationId }) {
                             <div className={styles.altVideoText}>{char1.name} & {char2.name}가<br/>열심히 영상 생성 중...</div>
                             <div className={styles.spinner} />
                         </div>}
-
-            {/* <div className={styles.buttonContainer}>
-                <button className={styles.downloadButton} onClick={handleDownloadClick}>다운로드</button>
-                <button className={styles.uploadButton} onClick={handleUploadClick}>업로드</button>
-            </div> */}
         </div>
     )
 }

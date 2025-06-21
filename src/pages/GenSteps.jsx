@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import styles from '../style/pages/GenSteps.module.scss';
 import GenStep1 from '../components/generator/gen-steps/GenStep1';
 import GenStep2 from '../components/generator/gen-steps/GenStep2';
-import GenStep3 from '../components/generator/gen-steps/GenStep3';
 import Result from '../components/generator/gen-steps/Result';
 
 export default function GenSteps() {
