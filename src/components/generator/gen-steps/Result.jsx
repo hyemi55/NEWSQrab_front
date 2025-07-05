@@ -10,9 +10,12 @@ export default function Result({ conversationId }) {
     const char1 = useSelector((state) => state.characters.char1);
     const char2 = useSelector((state) => state.characters.char2);
     const [url, setUrl] = useState("");
+    const [ progress, setProgress ] = useState(0);
+    const [ targetProgress, setTargetProgress ] = useState(0);
 
     useEffect(() => {
         const fetchVideo = async () => {
+
             const postDataForFinalize = {
                     articleId: articleId,
                     owner: username,
@@ -22,9 +25,18 @@ export default function Result({ conversationId }) {
                 }
 
             try {
+                setProgress(5);
+                setTargetProgress(40);
+
                 await axios.post(`${import.meta.env.VITE_BACKEND_URL}/reels/${conversationId}/tts`);
+                setProgress(40);
+                setTargetProgress(60);
                 await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/${conversationId}/confirm`);
+                setProgress(60);
+                setTargetProgress(85);
                 await axios.post(`${import.meta.env.VITE_BACKEND_URL}/reels/${conversationId}/generate-reels`);
+                setProgress(85);
+                setTargetProgress(95);
                 await axios.post(`${import.meta.env.VITE_BACKEND_URL}/reels/${conversationId}/add-subtitles`);
                 const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/reels/${conversationId}/finalize`, postDataForFinalize);
                 setUrl(response.data.reelsUrl);
@@ -37,6 +49,20 @@ export default function Result({ conversationId }) {
         fetchVideo();
     }, [])
 
+    useEffect(() => {
+        let interval;
+        if (url=="") {
+            interval = setInterval(() => {
+                setProgress((prev) => {
+                    if (prev >= targetProgress) return prev;
+                    return Math.min(prev + Math.random() * 1, targetProgress);
+                })
+            }, 700);
+        }
+
+        return () => clearInterval(interval);
+    }, [url, targetProgress])
+
     return (
         <div className={styles.container}>
             <div className={styles.title}>완성~ 내 뉴스를 업로드해볼까?</div>
@@ -44,7 +70,9 @@ export default function Result({ conversationId }) {
             {!url=="" ? <video src={url} controls className={styles.video}/>
                         : <div className={styles.altVideoContianer}>
                             <div className={styles.altVideoText}>{char1.name} & {char2.name}가<br/>열심히 영상 생성 중...</div>
-                            <div className={styles.spinner} />
+                            <div className={styles.progressBarWrapper}>
+                                <div className={styles.progressBar} style={{ width: `${progress}%`}}/>
+                            </div>
                         </div>}
         </div>
     )

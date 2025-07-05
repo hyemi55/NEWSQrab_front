@@ -88,19 +88,21 @@
     }
 }
 
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 5px solid #ccc;
-  border-top-color: #FF543D;
-  border-radius: 50%;
-  animation: spin 1s ease-in-out infinite;
+.progressBarWrapper {
+    width: 100%;
+    height: 6px;
+    background-color: #eee;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: opacity 0.3s ease-in-out;
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+.progressBar {
+    height: 100%;
+    background-color: #FF543D;
+    width: 0%;
+    transition: width 0.2s ease;
+    border-radius: 4px;
 }
 
 .lineBlock {
@@ -117,6 +119,7 @@
     flex-direction: column;
     align-items: end;
     gap: 20px;
+    overflow-y: auto;
 
     height: 304px;
 

@@ -7,10 +7,12 @@ import { useSelector } from 'react-redux';
 export default function GenStep2({ conversation, setConversation, setConversationId, isLoading, setIsLoading }) {
     const char1 = useSelector((state) => state.characters.char1);
     const char2 = useSelector((state) => state.characters.char2);
-    const [userInput, setUserInput] = useState("");
-    const [userInputArray, setUserInputArray] = useState([]);
+    const [ userInput, setUserInput ] = useState("");
+    const [ userInputArray, setUserInputArray ] = useState([]);
     const { articleId } = useParams();
-    const [parentId, setParentId] = useState("");
+    const [ parentId, setParentId ] = useState("");
+    const [ progress, setProgress ] = useState(0);
+    const [ targetProgress, setTargetProgress ] = useState(0);
 
     useEffect(() => {
         const fetchConversation = async () => {
@@ -22,6 +24,9 @@ export default function GenStep2({ conversation, setConversation, setConversatio
             }
 
             try {
+                setProgress(10);
+                setTargetProgress(20);
+
                 const response1 = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/original`, postDataForOriginal);
 
                 const parentConversationId = response1.data._id;
@@ -31,6 +36,9 @@ export default function GenStep2({ conversation, setConversation, setConversatio
                     character1: char1.species,
                     character2: char2.species,
                 }
+
+                setProgress(20);
+                setTargetProgress(95);
 
                 const response2 = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/rag-modified`, postDataForRag);
 
@@ -47,6 +55,23 @@ export default function GenStep2({ conversation, setConversation, setConversatio
         fetchConversation();
 
     }, [])
+
+    useEffect(() => {
+        let interval;
+        if (isLoading) {
+            interval = setInterval(() => {
+                setProgress((prev) => {
+                    if (prev >= targetProgress) return prev; // 90%까지만 진행
+                    return Math.min(prev + Math.random() * 5, targetProgress); // 불규칙하게 증가
+                });
+            }, 1200); // 1.2초마다 증가
+        }
+        else {
+            setProgress(0);
+            setTargetProgress(0);
+        }
+        return () => clearInterval(interval);
+    }, [isLoading, targetProgress]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -65,6 +90,8 @@ export default function GenStep2({ conversation, setConversation, setConversatio
         setUserInput("");
 
         try {
+            setTargetProgress(30);
+
             const response1 = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/user-modified`, postDataForModified);
             
             const parentConversationId = response1.data._id;
@@ -74,6 +101,9 @@ export default function GenStep2({ conversation, setConversation, setConversatio
                 character1: char1.species,
                 character2: char2.species,
             }
+
+            setProgress(25);
+            setTargetProgress(95);
             const response2 = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/rag-modified`, postDataForRag);
 
             setConversation(response2.data.script);
@@ -97,7 +127,9 @@ export default function GenStep2({ conversation, setConversation, setConversatio
                     {isLoading ? 
                         <div className={styles.loadingFlexDiv}>
                             <span><strong>RAG</strong>로 배경지식을 채워, 더 똑똑한 대화를 만들어드릴게요 !</span>
-                            <div className={styles.spinner} />
+                            <div className={styles.progressBarWrapper}>
+                                <div className={styles.progressBar} style={{ width: `${progress}%`}}/>
+                            </div>
                         </div>: (
                         conversation.map((lineObj, index) => {
                             const [speaker, text] = Object.entries(lineObj)[0];
