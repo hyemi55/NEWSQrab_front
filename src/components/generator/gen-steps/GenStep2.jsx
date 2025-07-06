@@ -64,7 +64,7 @@ export default function GenStep2({ conversation, setConversation, setConversatio
                     if (prev >= targetProgress) return prev; // 90%까지만 진행
                     return Math.min(prev + Math.random() * 5, targetProgress); // 불규칙하게 증가
                 });
-            }, 1200); // 1.2초마다 증가
+            }, 1500); // 1.5초마다 증가
         }
         else {
             setProgress(0);
@@ -106,6 +106,7 @@ export default function GenStep2({ conversation, setConversation, setConversatio
             setTargetProgress(95);
             const response2 = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/conversation/generate/rag-modified`, postDataForRag);
 
+            setProgress(100)
             setConversation(response2.data.script);
             setParentId(response2.data._id);
             setConversationId(response2.data._id);

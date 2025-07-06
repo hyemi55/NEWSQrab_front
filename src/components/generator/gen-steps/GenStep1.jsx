@@ -9,8 +9,8 @@ export default function GenStep1() {
     const char2 = useSelector((state) => state.characters.char2);
     const dispatch = useDispatch();
     
-    const character1 = [Crab, Octopus];
-    const character2 = [StarFish, Bok, "선택 안 함"];
+    const character1 = [StarFish, Bok, "선택 안 함"];
+    const character2 = [Crab, Octopus];
 
     return (
         <div className={styles.container}>
@@ -37,20 +37,6 @@ export default function GenStep1() {
                 <div className={styles.customContainer}>
                     <div className={styles.label}>캐릭터A 선택<span> (설명 담당)</span></div>
                     <div className={styles.characterTypeContainer}>
-                        {character1.map((type, idx) => (
-                            <button className={`${styles.characterTypeButton} 
-                                                ${type==char1 ? styles.selectedTypeButton : ''}`} 
-                                    onClick={() => {
-                                            dispatch(setChar1(type))
-                                            setSelectedChar(type)
-                                        }} key={idx}>
-                                <img src={type==char1 ? type.img : type.grayImg} />       
-                            </button>
-                        ))}
-                    </div>
-                    
-                    <div className={styles.label}>캐릭터B 선택<span> (리액션 담당)</span></div>
-                    <div className={styles.characterTypeContainer}>
                         {character2.map((type, idx) => (
                             <button className={`${styles.characterTypeButton} 
                                                 ${type==char2 ? styles.selectedTypeButton : ''}`} 
@@ -58,8 +44,22 @@ export default function GenStep1() {
                                             dispatch(setChar2(type))
                                             setSelectedChar(type)
                                         }} key={idx}>
+                                <img src={type==char2 ? type.img : type.grayImg} />       
+                            </button>
+                        ))}
+                    </div>
+                    
+                    <div className={styles.label}>캐릭터B 선택<span> (리액션 담당)</span></div>
+                    <div className={styles.characterTypeContainer}>
+                        {character1.map((type, idx) => (
+                            <button className={`${styles.characterTypeButton} 
+                                                ${type==char1 ? styles.selectedTypeButton : ''}`} 
+                                    onClick={() => {
+                                            dispatch(setChar1(type))
+                                            setSelectedChar(type)
+                                        }} key={idx}>
                                 {type=="선택 안 함" ? "선택 안 함" :
-                                                    <img src={type==char2 ? type.img : type.grayImg} />}
+                                                    <img src={type==char1 ? type.img : type.grayImg} />}
                             </button>
                         ))}
                     </div>

@@ -41,8 +41,8 @@ export const Bok = {
 };
 
 const initialState = {
-    char1: Crab,
-    char2: StarFish,
+    char1: StarFish,
+    char2: Crab,
 }
 
 const charSlicer = createSlice ({
