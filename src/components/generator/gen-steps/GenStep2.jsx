@@ -64,7 +64,7 @@ export default function GenStep2({ conversation, setConversation, setConversatio
                     if (prev >= targetProgress) return prev; // 90%까지만 진행
                     return Math.min(prev + Math.random() * 5, targetProgress); // 불규칙하게 증가
                 });
-            }, 1500); // 1.5초마다 증가
+            }, 1350); // 1.35초마다 증가
         }
         else {
             setProgress(0);
